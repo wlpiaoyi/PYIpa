@@ -1,22 +1,22 @@
 //
-//  NSObject+Hook.h
+//  UIResponder+Hook.h
 //  UtileScourceCode
 //
 //  Created by wlpiaoyi on 16/7/11.
 //  Copyright © 2016年 wlpiaoyi. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 /**
  hook 转屏 delegate
  */
-@protocol NSObjectHookBaseDelegate<NSObject>
+@protocol UIResponderHookBaseDelegate<NSObject>
 @optional
 -(void) beforeExcuteDealloc:(nonnull BOOL *) isExcute target:(nonnull NSObject *) target;
 @end
 
-@interface NSObject(Hook)
-+(nullable NSHashTable<id<NSObjectHookBaseDelegate>> *) delegateBase;
+@interface UIResponder(Hook)
++(nullable NSHashTable<id<UIResponderHookBaseDelegate>> *) delegateBase;
 /**
  hook Controller 的方法
  规则: method , exchangeMethod

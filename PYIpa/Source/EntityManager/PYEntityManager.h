@@ -44,6 +44,7 @@
  */
 -(BOOL) remove:(nonnull id<PYEntity>) entity;
 //==>查询数据
+
 /**
  查询单个实体
  */

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150AA58E1EC2D78700433FD2 /* PYTestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AA58D1EC2D78700433FD2 /* PYTestEntity.m */; };
 		1554CF001DFCECC500154ABD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CEFF1DFCECC500154ABD /* main.m */; };
 		1554CF031DFCECC500154ABD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF021DFCECC500154ABD /* AppDelegate.m */; };
 		1554CF061DFCECC500154ABD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF051DFCECC500154ABD /* ViewController.m */; };
@@ -58,6 +59,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		150AA58C1EC2D78700433FD2 /* PYTestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTestEntity.h; sourceTree = "<group>"; };
+		150AA58D1EC2D78700433FD2 /* PYTestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTestEntity.m; sourceTree = "<group>"; };
 		1554CEFB1DFCECC500154ABD /* PYIpa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYIpa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1554CEFF1DFCECC500154ABD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1554CF011DFCECC500154ABD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,7 +126,6 @@
 		1554CF5B1DFCED9700154ABD /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookView.h"; sourceTree = "<group>"; };
 		1554CF601DFCEE8300154ABD /* libpyipaa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpyipaa.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1554CF621DFCEE8300154ABD /* pyipaa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pyipaa.h; sourceTree = "<group>"; };
-		1554CF631DFCEE8300154ABD /* pyipaa.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pyipaa.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,8 @@
 				1554CF0C1DFCECC500154ABD /* LaunchScreen.storyboard */,
 				1554CF0F1DFCECC500154ABD /* Info.plist */,
 				1554CEFE1DFCECC500154ABD /* Supporting Files */,
+				150AA58C1EC2D78700433FD2 /* PYTestEntity.h */,
+				150AA58D1EC2D78700433FD2 /* PYTestEntity.m */,
 			);
 			path = PYIpa;
 			sourceTree = "<group>";
@@ -301,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				1554CF621DFCEE8300154ABD /* pyipaa.h */,
-				1554CF631DFCEE8300154ABD /* pyipaa.m */,
 			);
 			path = pyipaa;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 			files = (
 				1554CF061DFCECC500154ABD /* ViewController.m in Sources */,
 				1554CF031DFCECC500154ABD /* AppDelegate.m in Sources */,
+				150AA58E1EC2D78700433FD2 /* PYTestEntity.m in Sources */,
 				1554CF2D1DFCED3000154ABD /* PYEntityAsist.m in Sources */,
 				1554CF2C1DFCED3000154ABD /* PYConfigManager.m in Sources */,
 				1554CF001DFCECC500154ABD /* main.m in Sources */,
@@ -556,6 +560,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYIpa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -573,6 +578,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYIpa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -619,6 +625,7 @@
 				1554CF141DFCECC500154ABD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1554CF661DFCEE8300154ABD /* Build configuration list for PBXNativeTarget "pyipaa" */ = {
 			isa = XCConfigurationList;
@@ -627,6 +634,7 @@
 				1554CF681DFCEE8300154ABD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

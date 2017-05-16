@@ -6,6 +6,7 @@
 //  Copyright © 2016年 wlpiaoyi. All rights reserved.
 //
 
+#define pyutilea true;
 
 #import  "PYUtile.h"
 #import  "PYInvoke.h"
@@ -33,7 +34,7 @@
 #import  "PYGraphicsDraw.h"
 #import  "PYGraphicsThumb.h"
 
-#import  "NSObject+Hook.h"
+#import  "UIResponder+Hook.h"
 #import  "UIView+Hook.h"
 #import  "UIViewController+Hook.h"
 #import  "UIViewController+HookView.h"

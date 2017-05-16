@@ -7,6 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "PYConfigManager.h"
+#import "PYEntityAsist.h"
+#import "PYTestEntity.h"
+#import "PYEntityManager.h"
+@interface test1:NSObject
+@property (nonatomic) CGRect r;
+@property (nonatomic,strong) NSArray<test1 *> * t;
+@end
+@implementation test1
+@end
 
 @interface AppDelegate ()
 
@@ -16,8 +26,27 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    test1 * t1 = [self createTest];
+    test1 * t2 = [self createTest];
+    NSArray * a = @[t1, t2];
+    [PYConfigManager setConfigValue:a Key:@"a"];
+    a = [PYConfigManager getConfigValue:@"a"];
+    [PYEntityAsist synEntity:@[[PYTestEntity class]] dataBaseName:@"test.db"];
+    PYTestEntity * te = [PYTestEntity new];
+    te.name = @"我的测试";
+    PYEntityManager * em = [PYEntityManager enityWithDataBaseName:@"test.db"];
+    te = [em persist:te];
+    te.name = @"我的修改";
+    te  = [em merge:te];
+    te = [em find:te.keyId entityClass:[PYTestEntity class]];
     return YES;
+}
+-(test1 *) createTest{
+    test1 * t = [test1 new];
+    t.r = CGRectMake(2, 2, 2, 2);
+    test1 * t2 = [test1 new];
+    t.t = @[t2];
+    return t;
 }
 
 
