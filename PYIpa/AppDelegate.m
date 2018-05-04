@@ -14,6 +14,7 @@
 @interface test1:NSObject
 @property (nonatomic) CGRect r;
 @property (nonatomic,strong) NSArray<test1 *> * t;
+@property (nonatomic,strong) test1 * property_t;
 @end
 @implementation test1
 @end
@@ -26,8 +27,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     test1 * t1 = [self createTest];
     test1 * t2 = [self createTest];
+    NSDictionary * tempd =@{@"t1":t1, @"t2":t2, @"v":@(3)};
+    [PYConfigManager setConfigValue:@[tempd] Key:@"testd"];
+    id tempd2 = [PYConfigManager getConfigValue:@"testd"];
     NSArray * a = @[t1, t2];
     [PYConfigManager setConfigValue:a Key:@"a"];
     a = [PYConfigManager getConfigValue:@"a"];

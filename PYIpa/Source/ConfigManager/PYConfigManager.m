@@ -16,51 +16,14 @@ const NSString *PYConfigManger_ValueArg = @"PYConfigManger_ValueArg";
 
 @implementation PYConfigManager
 +(BOOL) setConfigValue:(id) value Key:(NSString*) key{
-    
     NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
-    id cache;
-    if ([value isKindOfClass:[NSDictionary class]] ||
-        [value isKindOfClass:[NSString class]] ||
-        [value isKindOfClass:[NSNumber class]] ||
-        [value isKindOfClass:[NSData class]] ||
-        [value isKindOfClass:[NSDate class]]) {
-        cache = value;
-    }else if([value isKindOfClass:[NSArray class]]){
-        NSMutableArray * array = [NSMutableArray new];
-        for (NSObject * obj in value ) {
-            id objDict = @{PYConfigManger_KeyArg:NSStringFromClass([((NSObject*)obj) class]),PYConfigManger_ValueArg:[obj objectToDictionary] };
-            [array addObject:objDict];
-        }
-        cache = array;
-    } else{
-        cache = @{PYConfigManger_KeyArg:NSStringFromClass([((NSObject*)value) class]),PYConfigManger_ValueArg:[value objectToDictionary] };
-    }
-    [usrDefauls setValue:cache forKey:key];
+    [usrDefauls setValue:[self parseValueForSet:value] forKey:key];
    return [usrDefauls synchronize];
 }
 +(id) getConfigValue:(NSString*) key{
-    
     NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
     id value =  [usrDefauls valueForKey:key];
-    if (!value) {
-        return nil;
-    }
-    if ([value isKindOfClass:[NSDictionary class]]) {
-        NSString *tempKeyArg = value[PYConfigManger_KeyArg];
-        Class clazz;
-        if (tempKeyArg && tempKeyArg.length && (clazz = NSClassFromString(tempKeyArg))) {
-            value = [clazz objectWithDictionary:value[PYConfigManger_ValueArg]];
-        }
-    }else if([value isKindOfClass:[NSArray class]]){
-        NSMutableArray * array = [NSMutableArray new];
-        for (NSDictionary * obj in value ) {
-            NSString *tempKeyArg = obj[PYConfigManger_KeyArg];
-            Class clazz = NSClassFromString(tempKeyArg);
-            [array addObject:[clazz objectWithDictionary:obj[PYConfigManger_ValueArg]]];
-        }
-        value = array;
-    }
-    return value;
+    return [self parseValueForGet:value];
 }
 +(void) removeConfigValue:(NSString*) key{
     NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
@@ -73,6 +36,81 @@ const NSString *PYConfigManger_ValueArg = @"PYConfigManger_ValueArg";
     for (NSString *key in keys) {
         [usrDefauls removeObjectForKey:key];
     }
+}
+
++(BOOL) canPersisitForValue:(Class) value{
+    if ([value isKindOfClass:[NSString class]] ||
+        [value isKindOfClass:[NSNumber class]] ||
+        [value isKindOfClass:[NSData class]] ||
+        [value isKindOfClass:[NSDate class]]) {
+        return true;
+    }
+    return false;
+}
+
++(id) parseValueForSet:(id) value{
+    if ([self canPersisitForValue:value]) {
+        return value;
+    }else if([value isKindOfClass:[NSArray class]]){
+        NSMutableArray * array = [NSMutableArray new];
+        for (NSObject * obj in value ) {
+            id objDict = [self parseValueForSet:obj];
+            [array addObject:objDict];
+        }
+        return array;
+    }else if([value isKindOfClass:[NSSet class]]){
+        NSMutableSet * array = [NSMutableSet new];
+        for (NSObject * obj in value ) {
+            id objDict = [self parseValueForSet:obj];
+            [array addObject:objDict];
+        }
+        return array;
+    }else if([value isKindOfClass:[NSDictionary class]]){
+        NSMutableDictionary * dict = [NSMutableDictionary new];
+        for (NSString * key in ((NSDictionary *) value)) {
+            id objDict = [self parseValueForSet:value[key]];
+            if(objDict) dict[key] = objDict;
+        }
+        return dict;
+    }else{
+        return @{PYConfigManger_KeyArg:NSStringFromClass([((NSObject*)value) class]),PYConfigManger_ValueArg:[value objectToDictionary] };
+    }
+}
++(id) parseValueForGet:(id) value{
+    if (!value)  return nil;
+    if ([value isKindOfClass:[NSDictionary class]]) {
+        NSString * tempKeyArg = value[PYConfigManger_KeyArg];
+        id tempValueArg = value[PYConfigManger_ValueArg];
+        if(tempKeyArg && tempValueArg){
+            Class clazz;
+            if (tempKeyArg && tempKeyArg.length && (clazz = NSClassFromString(tempKeyArg))) {
+                return [clazz objectWithDictionary: tempValueArg];
+            }
+        }else{
+            NSMutableDictionary * dict = [NSMutableDictionary new];
+            for (NSString * key in ((NSDictionary *)value)) {
+                id pValue = [self parseValueForGet:value[key]];
+                if(pValue) dict[key] = pValue;
+            }
+            return dict;
+        }
+    }else if([value isKindOfClass:[NSArray class]]){
+        NSMutableArray * array = [NSMutableArray new];
+        for (NSDictionary * obj in value ) {
+            id pValue = [self parseValueForGet:obj];
+            if(pValue) [array addObject:pValue];
+        }
+        return array;
+    }else if([value isKindOfClass:[NSSet class]]){
+        NSMutableSet * set = [NSMutableSet new];
+        for (NSDictionary * obj in value ) {
+            id pValue = [self parseValueForGet:obj];
+            if(pValue) [set addObject:pValue];
+        }
+        return set;
+    }
+    return value;
+    
 }
 
 @end
