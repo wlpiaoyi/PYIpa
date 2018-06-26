@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15047DD8209DE60B00C3341E /* libpyutilea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15047DB7209DE60A00C3341E /* libpyutilea.a */; };
 		150AA58E1EC2D78700433FD2 /* PYTestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AA58D1EC2D78700433FD2 /* PYTestEntity.m */; };
-		151DFBB31FB42A9A00607CD4 /* libpyutilea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 151DFB911FB42A9900607CD4 /* libpyutilea.a */; };
 		1554CF001DFCECC500154ABD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CEFF1DFCECC500154ABD /* main.m */; };
 		1554CF031DFCECC500154ABD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF021DFCECC500154ABD /* AppDelegate.m */; };
 		1554CF061DFCECC500154ABD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF051DFCECC500154ABD /* ViewController.m */; };
@@ -59,41 +59,40 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		15047DB7209DE60A00C3341E /* libpyutilea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpyutilea.a; sourceTree = "<group>"; };
+		15047DB9209DE60A00C3341E /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
+		15047DBA209DE60A00C3341E /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
+		15047DBB209DE60A00C3341E /* NSArray+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Expand.h"; sourceTree = "<group>"; };
+		15047DBC209DE60A00C3341E /* NSData+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Expand.h"; sourceTree = "<group>"; };
+		15047DBD209DE60A00C3341E /* NSDate+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Expand.h"; sourceTree = "<group>"; };
+		15047DBE209DE60A00C3341E /* NSDictionary+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Expand.h"; sourceTree = "<group>"; };
+		15047DBF209DE60A00C3341E /* NSNumber+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Expand.h"; sourceTree = "<group>"; };
+		15047DC0209DE60A00C3341E /* NSObject+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Expand.h"; sourceTree = "<group>"; };
+		15047DC1209DE60A00C3341E /* NSString+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Expand.h"; sourceTree = "<group>"; };
+		15047DC2209DE60A00C3341E /* PYGraphicsDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsDraw.h; sourceTree = "<group>"; };
+		15047DC3209DE60A00C3341E /* PYGraphicsThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsThumb.h; sourceTree = "<group>"; };
+		15047DC4209DE60A00C3341E /* PYHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYHook.h; sourceTree = "<group>"; };
+		15047DC5209DE60A00C3341E /* PYInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYInvoke.h; sourceTree = "<group>"; };
+		15047DC6209DE60A00C3341E /* PYKeyboardNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYKeyboardNotification.h; sourceTree = "<group>"; };
+		15047DC7209DE60A00C3341E /* PYMotionNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYMotionNotification.h; sourceTree = "<group>"; };
+		15047DC8209DE60A00C3341E /* PYNetworkReachabilityNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYNetworkReachabilityNotification.h; sourceTree = "<group>"; };
+		15047DC9209DE60A00C3341E /* PYOrientationNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYOrientationNotification.h; sourceTree = "<group>"; };
+		15047DCA209DE60A00C3341E /* PYUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		15047DCB209DE60A00C3341E /* PYUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUtile.h; sourceTree = "<group>"; };
+		15047DCC209DE60A00C3341E /* pyutilea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pyutilea.h; sourceTree = "<group>"; };
+		15047DCD209DE60A00C3341E /* PYViewAutolayoutCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYViewAutolayoutCenter.h; sourceTree = "<group>"; };
+		15047DCE209DE60A00C3341E /* PYXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYXml.h; sourceTree = "<group>"; };
+		15047DCF209DE60A00C3341E /* UIColor+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expand.h"; sourceTree = "<group>"; };
+		15047DD0209DE60A00C3341E /* UIImage+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Expand.h"; sourceTree = "<group>"; };
+		15047DD1209DE60A00C3341E /* UILable+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+Expand.h"; sourceTree = "<group>"; };
+		15047DD2209DE60A00C3341E /* UIResponder+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+Hook.h"; sourceTree = "<group>"; };
+		15047DD3209DE60A00C3341E /* UIView+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Expand.h"; sourceTree = "<group>"; };
+		15047DD4209DE60A00C3341E /* UIView+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hook.h"; sourceTree = "<group>"; };
+		15047DD5209DE60A00C3341E /* UIViewController+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Hook.h"; sourceTree = "<group>"; };
+		15047DD6209DE60A00C3341E /* UIViewController+HookOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookOrientation.h"; sourceTree = "<group>"; };
+		15047DD7209DE60A00C3341E /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookView.h"; sourceTree = "<group>"; };
 		150AA58C1EC2D78700433FD2 /* PYTestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYTestEntity.h; sourceTree = "<group>"; };
 		150AA58D1EC2D78700433FD2 /* PYTestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYTestEntity.m; sourceTree = "<group>"; };
-		151DFB911FB42A9900607CD4 /* libpyutilea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpyutilea.a; sourceTree = "<group>"; };
-		151DFB931FB42A9900607CD4 /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
-		151DFB941FB42A9900607CD4 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
-		151DFB951FB42A9900607CD4 /* NSArray+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Expand.h"; sourceTree = "<group>"; };
-		151DFB961FB42A9900607CD4 /* NSData+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Expand.h"; sourceTree = "<group>"; };
-		151DFB971FB42A9900607CD4 /* NSDate+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Expand.h"; sourceTree = "<group>"; };
-		151DFB981FB42A9900607CD4 /* NSDictionary+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Expand.h"; sourceTree = "<group>"; };
-		151DFB991FB42A9900607CD4 /* NSNumber+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Expand.h"; sourceTree = "<group>"; };
-		151DFB9A1FB42A9900607CD4 /* NSObject+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Expand.h"; sourceTree = "<group>"; };
-		151DFB9B1FB42A9900607CD4 /* NSString+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Expand.h"; sourceTree = "<group>"; };
-		151DFB9C1FB42A9900607CD4 /* PYGraphicsDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsDraw.h; sourceTree = "<group>"; };
-		151DFB9D1FB42A9900607CD4 /* PYGraphicsThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYGraphicsThumb.h; sourceTree = "<group>"; };
-		151DFB9E1FB42A9900607CD4 /* PYHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYHook.h; sourceTree = "<group>"; };
-		151DFB9F1FB42A9900607CD4 /* PYInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYInvoke.h; sourceTree = "<group>"; };
-		151DFBA01FB42A9900607CD4 /* PYKeyboardNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYKeyboardNotification.h; sourceTree = "<group>"; };
-		151DFBA11FB42A9900607CD4 /* PYMotionNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYMotionNotification.h; sourceTree = "<group>"; };
-		151DFBA21FB42A9900607CD4 /* PYOrientationNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYOrientationNotification.h; sourceTree = "<group>"; };
-		151DFBA31FB42A9900607CD4 /* PYReachabilityNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYReachabilityNotification.h; sourceTree = "<group>"; };
-		151DFBA41FB42A9900607CD4 /* PYUncaughtExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUncaughtExceptionHandler.h; sourceTree = "<group>"; };
-		151DFBA51FB42A9900607CD4 /* PYUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYUtile.h; sourceTree = "<group>"; };
-		151DFBA61FB42A9900607CD4 /* pyutilea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pyutilea.h; sourceTree = "<group>"; };
-		151DFBA71FB42A9900607CD4 /* PYViewAutolayoutCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYViewAutolayoutCenter.h; sourceTree = "<group>"; };
-		151DFBA81FB42A9900607CD4 /* PYXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYXml.h; sourceTree = "<group>"; };
-		151DFBA91FB42A9900607CD4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		151DFBAA1FB42A9900607CD4 /* UIColor+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expand.h"; sourceTree = "<group>"; };
-		151DFBAB1FB42A9900607CD4 /* UIImage+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Expand.h"; sourceTree = "<group>"; };
-		151DFBAC1FB42A9900607CD4 /* UILable+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+Expand.h"; sourceTree = "<group>"; };
-		151DFBAD1FB42A9900607CD4 /* UIResponder+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+Hook.h"; sourceTree = "<group>"; };
-		151DFBAE1FB42A9900607CD4 /* UIView+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Expand.h"; sourceTree = "<group>"; };
-		151DFBAF1FB42A9900607CD4 /* UIView+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Hook.h"; sourceTree = "<group>"; };
-		151DFBB01FB42A9900607CD4 /* UIViewController+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Hook.h"; sourceTree = "<group>"; };
-		151DFBB11FB42A9900607CD4 /* UIViewController+HookOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookOrientation.h"; sourceTree = "<group>"; };
-		151DFBB21FB42A9900607CD4 /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HookView.h"; sourceTree = "<group>"; };
 		1554CEFB1DFCECC500154ABD /* PYIpa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PYIpa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1554CEFF1DFCECC500154ABD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1554CF011DFCECC500154ABD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -133,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				151DFBB31FB42A9A00607CD4 /* libpyutilea.a in Frameworks */,
+				15047DD8209DE60B00C3341E /* libpyutilea.a in Frameworks */,
 				1554CF371DFCED4C00154ABD /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,52 +147,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15047DB6209DE60A00C3341E /* pyutile */ = {
+			isa = PBXGroup;
+			children = (
+				15047DB7209DE60A00C3341E /* libpyutilea.a */,
+				15047DB8209DE60A00C3341E /* pyutilea */,
+			);
+			path = pyutile;
+			sourceTree = "<group>";
+		};
+		15047DB8209DE60A00C3341E /* pyutilea */ = {
+			isa = PBXGroup;
+			children = (
+				15047DB9209DE60A00C3341E /* EXTScope.h */,
+				15047DBA209DE60A00C3341E /* metamacros.h */,
+				15047DBB209DE60A00C3341E /* NSArray+Expand.h */,
+				15047DBC209DE60A00C3341E /* NSData+Expand.h */,
+				15047DBD209DE60A00C3341E /* NSDate+Expand.h */,
+				15047DBE209DE60A00C3341E /* NSDictionary+Expand.h */,
+				15047DBF209DE60A00C3341E /* NSNumber+Expand.h */,
+				15047DC0209DE60A00C3341E /* NSObject+Expand.h */,
+				15047DC1209DE60A00C3341E /* NSString+Expand.h */,
+				15047DC2209DE60A00C3341E /* PYGraphicsDraw.h */,
+				15047DC3209DE60A00C3341E /* PYGraphicsThumb.h */,
+				15047DC4209DE60A00C3341E /* PYHook.h */,
+				15047DC5209DE60A00C3341E /* PYInvoke.h */,
+				15047DC6209DE60A00C3341E /* PYKeyboardNotification.h */,
+				15047DC7209DE60A00C3341E /* PYMotionNotification.h */,
+				15047DC8209DE60A00C3341E /* PYNetworkReachabilityNotification.h */,
+				15047DC9209DE60A00C3341E /* PYOrientationNotification.h */,
+				15047DCA209DE60A00C3341E /* PYUncaughtExceptionHandler.h */,
+				15047DCB209DE60A00C3341E /* PYUtile.h */,
+				15047DCC209DE60A00C3341E /* pyutilea.h */,
+				15047DCD209DE60A00C3341E /* PYViewAutolayoutCenter.h */,
+				15047DCE209DE60A00C3341E /* PYXml.h */,
+				15047DCF209DE60A00C3341E /* UIColor+Expand.h */,
+				15047DD0209DE60A00C3341E /* UIImage+Expand.h */,
+				15047DD1209DE60A00C3341E /* UILable+Expand.h */,
+				15047DD2209DE60A00C3341E /* UIResponder+Hook.h */,
+				15047DD3209DE60A00C3341E /* UIView+Expand.h */,
+				15047DD4209DE60A00C3341E /* UIView+Hook.h */,
+				15047DD5209DE60A00C3341E /* UIViewController+Hook.h */,
+				15047DD6209DE60A00C3341E /* UIViewController+HookOrientation.h */,
+				15047DD7209DE60A00C3341E /* UIViewController+HookView.h */,
+			);
+			path = pyutilea;
+			sourceTree = "<group>";
+		};
 		151DFB901FB42A9900607CD4 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				151DFB911FB42A9900607CD4 /* libpyutilea.a */,
-				151DFB921FB42A9900607CD4 /* pyutilea */,
+				15047DB6209DE60A00C3341E /* pyutile */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		151DFB921FB42A9900607CD4 /* pyutilea */ = {
-			isa = PBXGroup;
-			children = (
-				151DFB931FB42A9900607CD4 /* EXTScope.h */,
-				151DFB941FB42A9900607CD4 /* metamacros.h */,
-				151DFB951FB42A9900607CD4 /* NSArray+Expand.h */,
-				151DFB961FB42A9900607CD4 /* NSData+Expand.h */,
-				151DFB971FB42A9900607CD4 /* NSDate+Expand.h */,
-				151DFB981FB42A9900607CD4 /* NSDictionary+Expand.h */,
-				151DFB991FB42A9900607CD4 /* NSNumber+Expand.h */,
-				151DFB9A1FB42A9900607CD4 /* NSObject+Expand.h */,
-				151DFB9B1FB42A9900607CD4 /* NSString+Expand.h */,
-				151DFB9C1FB42A9900607CD4 /* PYGraphicsDraw.h */,
-				151DFB9D1FB42A9900607CD4 /* PYGraphicsThumb.h */,
-				151DFB9E1FB42A9900607CD4 /* PYHook.h */,
-				151DFB9F1FB42A9900607CD4 /* PYInvoke.h */,
-				151DFBA01FB42A9900607CD4 /* PYKeyboardNotification.h */,
-				151DFBA11FB42A9900607CD4 /* PYMotionNotification.h */,
-				151DFBA21FB42A9900607CD4 /* PYOrientationNotification.h */,
-				151DFBA31FB42A9900607CD4 /* PYReachabilityNotification.h */,
-				151DFBA41FB42A9900607CD4 /* PYUncaughtExceptionHandler.h */,
-				151DFBA51FB42A9900607CD4 /* PYUtile.h */,
-				151DFBA61FB42A9900607CD4 /* pyutilea.h */,
-				151DFBA71FB42A9900607CD4 /* PYViewAutolayoutCenter.h */,
-				151DFBA81FB42A9900607CD4 /* PYXml.h */,
-				151DFBA91FB42A9900607CD4 /* Reachability.h */,
-				151DFBAA1FB42A9900607CD4 /* UIColor+Expand.h */,
-				151DFBAB1FB42A9900607CD4 /* UIImage+Expand.h */,
-				151DFBAC1FB42A9900607CD4 /* UILable+Expand.h */,
-				151DFBAD1FB42A9900607CD4 /* UIResponder+Hook.h */,
-				151DFBAE1FB42A9900607CD4 /* UIView+Expand.h */,
-				151DFBAF1FB42A9900607CD4 /* UIView+Hook.h */,
-				151DFBB01FB42A9900607CD4 /* UIViewController+Hook.h */,
-				151DFBB11FB42A9900607CD4 /* UIViewController+HookOrientation.h */,
-				151DFBB21FB42A9900607CD4 /* UIViewController+HookView.h */,
-			);
-			path = pyutilea;
 			sourceTree = "<group>";
 		};
 		1554CEF21DFCECC500154ABD = {
@@ -560,6 +566,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/include",
+					"$(PROJECT_DIR)/include/pyutile",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYIpa;
@@ -579,6 +586,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/include",
+					"$(PROJECT_DIR)/include/pyutile",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = wlpiaoyi.PYIpa;

@@ -15,21 +15,22 @@ const NSString *PYConfigManger_ValueArg = @"PYConfigManger_ValueArg";
 
 
 @implementation PYConfigManager
-+(BOOL) setConfigValue:(id) value Key:(NSString*) key{
+
++(BOOL) setValue:(id) value key:(NSString*) key{
     NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
     [usrDefauls setValue:[self parseValueForSet:value] forKey:key];
-   return [usrDefauls synchronize];
+    return [usrDefauls synchronize];
 }
-+(id) getConfigValue:(NSString*) key{
++(id) getValue:(NSString*) key{
     NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
     id value =  [usrDefauls valueForKey:key];
     return [self parseValueForGet:value];
 }
-+(void) removeConfigValue:(NSString*) key{
++(void) removeValue:(NSString*) key{
     NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
     [usrDefauls removeObjectForKey:key];
 }
-+(void) removeALL{
++(void) removeAll{
     NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
     NSDictionary *datas = [usrDefauls dictionaryRepresentation];
     NSArray *keys = [datas allKeys];
@@ -111,6 +112,20 @@ const NSString *PYConfigManger_ValueArg = @"PYConfigManger_ValueArg";
     }
     return value;
     
+}
+
+
++(BOOL) setConfigValue:(id) value Key:(NSString*) key{
+    return [self setValue:value key:key];
+}
++(id) getConfigValue:(NSString*) key{
+    return [self getValue:key];
+}
++(void) removeConfigValue:(NSString*) key{
+    [self removeValue:key];
+}
++(void) removeALL{
+    [self removeAll];
 }
 
 @end
