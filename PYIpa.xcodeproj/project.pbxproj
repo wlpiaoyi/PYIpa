@@ -39,6 +39,9 @@
 		1554CF771DFCEEF700154ABD /* PYEntityAsist.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1554CF1A1DFCED3000154ABD /* PYEntityAsist.h */; };
 		1554CF781DFCEEF700154ABD /* PYEntityManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1554CF1C1DFCED3000154ABD /* PYEntityManager.h */; };
 		1554CF791DFCEEF700154ABD /* PYEntitySql.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1554CF1E1DFCED3000154ABD /* PYEntitySql.h */; };
+		15E3EB732159E140005A431F /* PYEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E3EB722159E140005A431F /* PYEventManager.m */; };
+		15E3EB74215A070B005A431F /* PYEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E3EB722159E140005A431F /* PYEventManager.m */; };
+		15E3EB75215A071B005A431F /* PYEventManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15E3EB712159E140005A431F /* PYEventManager.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +51,7 @@
 			dstPath = "$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				15E3EB75215A071B005A431F /* PYEventManager.h in CopyFiles */,
 				1554CF761DFCEEF700154ABD /* PYConfigManager.h in CopyFiles */,
 				1554CF771DFCEEF700154ABD /* PYEntityAsist.h in CopyFiles */,
 				1554CF781DFCEEF700154ABD /* PYEntityManager.h in CopyFiles */,
@@ -125,6 +129,8 @@
 		1554CF361DFCED4C00154ABD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1554CF601DFCEE8300154ABD /* libpyipaa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpyipaa.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1554CF621DFCEE8300154ABD /* pyipaa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pyipaa.h; sourceTree = "<group>"; };
+		15E3EB712159E140005A431F /* PYEventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYEventManager.h; sourceTree = "<group>"; };
+		15E3EB722159E140005A431F /* PYEventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYEventManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +258,7 @@
 		1554CF151DFCED3000154ABD /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				15E3EB702159E10E005A431F /* EventManager */,
 				1554CF161DFCED3000154ABD /* ConfigManager */,
 				1554CF191DFCED3000154ABD /* EntityManager */,
 				1554CF201DFCED3000154ABD /* FMDB */,
@@ -313,6 +320,15 @@
 				1554CF621DFCEE8300154ABD /* pyipaa.h */,
 			);
 			path = pyipaa;
+			sourceTree = "<group>";
+		};
+		15E3EB702159E10E005A431F /* EventManager */ = {
+			isa = PBXGroup;
+			children = (
+				15E3EB712159E140005A431F /* PYEventManager.h */,
+				15E3EB722159E140005A431F /* PYEventManager.m */,
+			);
+			path = EventManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,6 +433,7 @@
 				1554CF2C1DFCED3000154ABD /* PYConfigManager.m in Sources */,
 				1554CF001DFCECC500154ABD /* main.m in Sources */,
 				1554CF311DFCED3000154ABD /* FMDatabaseAdditions.m in Sources */,
+				15E3EB732159E140005A431F /* PYEventManager.m in Sources */,
 				1554CF341DFCED3000154ABD /* FMResultSet.m in Sources */,
 				1554CF2F1DFCED3000154ABD /* PYEntitySql.m in Sources */,
 				1554CF321DFCED3000154ABD /* FMDatabasePool.m in Sources */,
@@ -430,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E3EB74215A070B005A431F /* PYEventManager.m in Sources */,
 				1554CF6D1DFCEEE800154ABD /* PYConfigManager.m in Sources */,
 				1554CF6E1DFCEEE800154ABD /* PYEntityAsist.m in Sources */,
 				1554CF6F1DFCEEE800154ABD /* PYEntityManager.m in Sources */,

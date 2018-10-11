@@ -11,6 +11,7 @@
 #import "PYEntityAsist.h"
 #import "PYTestEntity.h"
 #import "PYEntityManager.h"
+#import "PYEventManager.h"
 @interface test1:NSObject
 @property (nonatomic) CGRect r;
 @property (nonatomic,strong) NSArray<test1 *> * t;
@@ -27,7 +28,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [[PYEventManager singleInstance] presisitEvent:@"我的测试" startDate:[NSDate dateWithTimeIntervalSinceNow:60 * 3] endDate:[NSDate dateWithTimeIntervalSinceNow:60 * 4] alarmDate:[NSDate dateWithTimeIntervalSinceNow:60 * 1] completion:^(BOOL granted, NSError * _Nullable error) {
+        NSLog(@"");
+    }];
     test1 * t1 = [self createTest];
     test1 * t2 = [self createTest];
     NSDictionary * tempd =@{@"t1":t1, @"t2":t2, @"v":@(3)};
