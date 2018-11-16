@@ -28,8 +28,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[PYEventManager singleInstance] presisitEvent:@"我的测试" startDate:[NSDate dateWithTimeIntervalSinceNow:60 * 3] endDate:[NSDate dateWithTimeIntervalSinceNow:60 * 4] alarmDate:[NSDate dateWithTimeIntervalSinceNow:60 * 1] completion:^(BOOL granted, NSError * _Nullable error) {
-        NSLog(@"");
+    [[PYEventManager singleInstance] presisitEvent:@"我的测试" startDate:[NSDate dateWithTimeIntervalSinceNow:60 * 3] endDate:[NSDate dateWithTimeIntervalSinceNow:60 * 4] alarmDate:[NSDate dateWithTimeIntervalSinceNow:60 * 1] completion:^(id data) {
+        
     }];
     test1 * t1 = [self createTest];
     test1 * t2 = [self createTest];

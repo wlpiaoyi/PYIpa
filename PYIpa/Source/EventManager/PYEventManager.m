@@ -13,6 +13,7 @@ static PYEventManager * xPYEventManager;
 
 @implementation PYEventManager{
 @private EKEventStore *_eventDB;
+    dispatch_semaphore_t semaphore;
 }
 +(instancetype) singleInstance{
     if(xPYEventManager == nil){
@@ -27,6 +28,7 @@ static PYEventManager * xPYEventManager;
 
 -(instancetype) init{
     
+    kDISPATCH_ONCE_BLOCK(^{semaphore = dispatch_semaphore_create(1);});
     if(self = [super init]){
         _eventDB = [[EKEventStore alloc] init];
     }
@@ -39,6 +41,7 @@ static PYEventManager * xPYEventManager;
                 alarmDate:(nonnull NSDate *) alarmDate
                 completion:(PYEventStoreRequestAccessCompletionHandler)completion{
     kAssign(self);
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     [_eventDB requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
         kStrong(self);
         if(granted){
@@ -52,6 +55,7 @@ static PYEventManager * xPYEventManager;
             [self->_eventDB saveEvent:event span:EKSpanThisEvent error:&error];
             if(completion) completion(error ? : event);
         }else if(completion) completion(error);
+        dispatch_semaphore_signal(semaphore);
     }];
 }
 -(nullable NSError *) removeEvent:(nonnull NSString *) identify{
@@ -59,7 +63,9 @@ static PYEventManager * xPYEventManager;
     EKEvent * event = [self findEvent:identify];
     if(event == nil) return nil;
     NSError * error;
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     [_eventDB removeEvent:event span:EKSpanThisEvent error:&error];
+    dispatch_semaphore_signal(semaphore);
     return error;
     
 }
@@ -74,6 +80,7 @@ static PYEventManager * xPYEventManager;
                     priority:(NSUInteger) priority
                     completion:(PYEventStoreRequestAccessCompletionHandler)completion{
     
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     kAssign(self);
     [_eventDB requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError * _Nullable error) {
         kStrong(self);
@@ -106,6 +113,8 @@ static PYEventManager * xPYEventManager;
             if(completion) completion(error ? : reminder);
             
         }else  if(completion) completion(error);
+        
+        dispatch_semaphore_signal(semaphore);
     }];
 }
 
