@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <EventKit/EventKit.h>
 
-typedef void(^PYEventStoreRequestAccessCompletionHandler)(id data);
+typedef void(^PYEventStoreRequestAccessCompletionHandler)(id _Nullable data);
 
 @interface PYEventManager : NSObject
 +(instancetype) singleInstance;
