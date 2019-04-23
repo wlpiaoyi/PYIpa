@@ -12,7 +12,7 @@
 typedef void(^PYEventStoreRequestAccessCompletionHandler)(id _Nullable data);
 
 @interface PYEventManager : NSObject
-+(instancetype) singleInstance;
++(nonnull instancetype) singleInstance;
 -(void) presisitEvent:(nonnull NSString *) title
                             startDate:(nonnull NSDate *) startDate
                             endDate:(nonnull NSDate *) endDate

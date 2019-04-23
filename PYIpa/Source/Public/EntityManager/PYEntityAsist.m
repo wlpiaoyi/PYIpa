@@ -8,7 +8,7 @@
 
 #import "PYEntityAsist.h"
 #import "PYEntitySql.h"
-#import "FMDB.h"
+#import "PYIPADB.h"
 #import "pyutilea.h"
 #import <objc/runtime.h>
 
@@ -230,10 +230,10 @@ const NSString * _Nonnull PYEntityClassIvarSuffixStrong = @"@property (nonatomic
 }
 
 +(id) synEntity:(nullable NSArray<Class<PYEntity>>*) clazzs dataBaseName:(nonnull NSString*) dataBaseName{
-    FMDatabase *dataBase;
+    PYIPADatabase *dataBase;
     @synchronized(self) {
         NSString *dataBasePath = [NSString stringWithFormat:@"%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject, dataBaseName];
-        dataBase = [FMDatabase databaseWithPath:dataBasePath];
+        dataBase = [PYIPADatabase databaseWithPath:dataBasePath];
         if (clazzs && [clazzs count]) {
             
             if(![dataBase open]){
@@ -259,7 +259,7 @@ const NSString * _Nonnull PYEntityClassIvarSuffixStrong = @"@property (nonatomic
                     if (!class_conformsToProtocol(clazz, p)) {
                         continue;
                     }
-                    FMResultSet *result;
+                    PYIPAResultSet *result;
                     result = [dataBase executeQuery:[PYEntitySql getTableStrutSql:clazz]];
                     NSMutableArray<NSDictionary*> *struts = [NSMutableArray<NSDictionary*> new];
                     while ([result next]){

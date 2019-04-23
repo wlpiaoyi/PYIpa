@@ -1,19 +1,19 @@
-#import "FMResultSet.h"
-#import "FMDatabase.h"
+#import "PYIPAResultSet.h"
+#import "PYIPADatabase.h"
 #import "unistd.h"
 
-@interface FMDatabase ()
-- (void)resultSetDidClose:(FMResultSet *)resultSet;
+@interface PYIPADatabase ()
+- (void)resultSetDidClose:(PYIPAResultSet *)resultSet;
 @end
 
 
-@implementation FMResultSet
+@implementation PYIPAResultSet
 @synthesize query=_query;
 @synthesize statement=_statement;
 
-+ (instancetype)resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB {
++ (instancetype)resultSetWithStatement:(PYIPAStatement *)statement usingParentDatabase:(PYIPADatabase*)aDB {
     
-    FMResultSet *rs = [[FMResultSet alloc] init];
+    PYIPAResultSet *rs = [[PYIPAResultSet alloc] init];
     
     [rs setStatement:statement];
     [rs setParentDB:aDB];
@@ -21,7 +21,7 @@
     NSParameterAssert(![statement inUse]);
     [statement setInUse:YES]; // weak reference
     
-    return FMDBReturnAutoreleased(rs);
+    return PYIPADBReturnAutoreleased(rs);
 }
 
 - (void)finalize {
@@ -32,10 +32,10 @@
 - (void)dealloc {
     [self close];
     
-    FMDBRelease(_query);
+    PYIPADBRelease(_query);
     _query = nil;
     
-    FMDBRelease(_columnNameToIndexMap);
+    PYIPADBRelease(_columnNameToIndexMap);
     _columnNameToIndexMap = nil;
     
 #if ! __has_feature(objc_arc)
@@ -45,7 +45,7 @@
 
 - (void)close {
     [_statement reset];
-    FMDBRelease(_statement);
+    PYIPADBRelease(_statement);
     _statement = nil;
     
     // we don't need this anymore... (i think)
@@ -106,7 +106,7 @@
             [dict setObject:objectValue forKey:columnName];
         }
         
-        return FMDBReturnAutoreleased([dict copy]);
+        return PYIPADBReturnAutoreleased([dict copy]);
     }
     else {
         NSLog(@"Warning: There seem to be no columns in this set.");
@@ -373,7 +373,7 @@
     return [NSString stringWithUTF8String: sqlite3_column_name([_statement statement], columnIdx)];
 }
 
-- (void)setParentDB:(FMDatabase *)newDb {
+- (void)setParentDB:(PYIPADatabase *)newDb {
     _parentDB = newDb;
 }
 

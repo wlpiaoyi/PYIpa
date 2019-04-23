@@ -16,19 +16,19 @@
 #endif
 #endif
 
-@class FMDatabase;
-@class FMStatement;
+@class PYIPADatabase;
+@class PYIPAStatement;
 
-/** Represents the results of executing a query on an `<FMDatabase>`.
+/** Represents the results of executing a query on an `<PYIPADatabase>`.
  
  ### See also
  
- - `<FMDatabase>`
+ - `<PYIPADatabase>`
  */
 
-@interface FMResultSet : NSObject {
-    FMDatabase          *_parentDB;
-    FMStatement         *_statement;
+@interface PYIPAResultSet : NSObject {
+    PYIPADatabase          *_parentDB;
+    PYIPAStatement         *_statement;
     
     NSString            *_query;
     NSMutableDictionary *_columnNameToIndexMap;
@@ -46,30 +46,30 @@
 
 @property (readonly) NSMutableDictionary *columnNameToIndexMap;
 
-/** `FMStatement` used by result set. */
+/** `PYIPAStatement` used by result set. */
 
-@property (atomic, retain) FMStatement *statement;
+@property (atomic, retain) PYIPAStatement *statement;
 
 ///------------------------------------
 /// @name Creating and closing database
 ///------------------------------------
 
-/** Create result set from `<FMStatement>`
+/** Create result set from `<PYIPAStatement>`
  
- @param statement A `<FMStatement>` to be performed
+ @param statement A `<PYIPAStatement>` to be performed
  
- @param aDB A `<FMDatabase>` to be used
+ @param aDB A `<PYIPADatabase>` to be used
  
- @return A `FMResultSet` on success; `nil` on failure
+ @return A `PYIPAResultSet` on success; `nil` on failure
  */
 
-+ (instancetype)resultSetWithStatement:(FMStatement *)statement usingParentDatabase:(FMDatabase*)aDB;
++ (instancetype)resultSetWithStatement:(PYIPAStatement *)statement usingParentDatabase:(PYIPADatabase*)aDB;
 
 /** Close result set */
 
 - (void)close;
 
-- (void)setParentDB:(FMDatabase *)newDb;
+- (void)setParentDB:(PYIPADatabase *)newDb;
 
 ///---------------------------------------
 /// @name Iterating through the result set

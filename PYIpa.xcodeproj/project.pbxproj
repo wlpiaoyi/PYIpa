@@ -19,22 +19,22 @@
 		1554CF2D1DFCED3000154ABD /* PYEntityAsist.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF1B1DFCED3000154ABD /* PYEntityAsist.m */; };
 		1554CF2E1DFCED3000154ABD /* PYEntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF1D1DFCED3000154ABD /* PYEntityManager.m */; };
 		1554CF2F1DFCED3000154ABD /* PYEntitySql.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF1F1DFCED3000154ABD /* PYEntitySql.m */; };
-		1554CF301DFCED3000154ABD /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF221DFCED3000154ABD /* FMDatabase.m */; };
-		1554CF311DFCED3000154ABD /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF241DFCED3000154ABD /* FMDatabaseAdditions.m */; };
-		1554CF321DFCED3000154ABD /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF261DFCED3000154ABD /* FMDatabasePool.m */; };
-		1554CF331DFCED3000154ABD /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF281DFCED3000154ABD /* FMDatabaseQueue.m */; };
-		1554CF341DFCED3000154ABD /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF2B1DFCED3000154ABD /* FMResultSet.m */; };
+		1554CF301DFCED3000154ABD /* PYIPADatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF221DFCED3000154ABD /* PYIPADatabase.m */; };
+		1554CF311DFCED3000154ABD /* PYIPADatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF241DFCED3000154ABD /* PYIPADatabaseAdditions.m */; };
+		1554CF321DFCED3000154ABD /* PYIPADatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF261DFCED3000154ABD /* PYIPADatabasePool.m */; };
+		1554CF331DFCED3000154ABD /* PYIPADatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF281DFCED3000154ABD /* PYIPADatabaseQueue.m */; };
+		1554CF341DFCED3000154ABD /* PYIPAResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF2B1DFCED3000154ABD /* PYIPAResultSet.m */; };
 		1554CF371DFCED4C00154ABD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1554CF361DFCED4C00154ABD /* libsqlite3.tbd */; };
 		1554CF651DFCEE8300154ABD /* pyipaa.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1554CF621DFCEE8300154ABD /* pyipaa.h */; };
 		1554CF6D1DFCEEE800154ABD /* PYConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF181DFCED3000154ABD /* PYConfigManager.m */; };
 		1554CF6E1DFCEEE800154ABD /* PYEntityAsist.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF1B1DFCED3000154ABD /* PYEntityAsist.m */; };
 		1554CF6F1DFCEEE800154ABD /* PYEntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF1D1DFCED3000154ABD /* PYEntityManager.m */; };
 		1554CF701DFCEEE800154ABD /* PYEntitySql.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF1F1DFCED3000154ABD /* PYEntitySql.m */; };
-		1554CF711DFCEEE800154ABD /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF221DFCED3000154ABD /* FMDatabase.m */; };
-		1554CF721DFCEEE800154ABD /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF241DFCED3000154ABD /* FMDatabaseAdditions.m */; };
-		1554CF731DFCEEE800154ABD /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF261DFCED3000154ABD /* FMDatabasePool.m */; };
-		1554CF741DFCEEE800154ABD /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF281DFCED3000154ABD /* FMDatabaseQueue.m */; };
-		1554CF751DFCEEE800154ABD /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF2B1DFCED3000154ABD /* FMResultSet.m */; };
+		1554CF711DFCEEE800154ABD /* PYIPADatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF221DFCED3000154ABD /* PYIPADatabase.m */; };
+		1554CF721DFCEEE800154ABD /* PYIPADatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF241DFCED3000154ABD /* PYIPADatabaseAdditions.m */; };
+		1554CF731DFCEEE800154ABD /* PYIPADatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF261DFCED3000154ABD /* PYIPADatabasePool.m */; };
+		1554CF741DFCEEE800154ABD /* PYIPADatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF281DFCED3000154ABD /* PYIPADatabaseQueue.m */; };
+		1554CF751DFCEEE800154ABD /* PYIPAResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1554CF2B1DFCED3000154ABD /* PYIPAResultSet.m */; };
 		1554CF761DFCEEF700154ABD /* PYConfigManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1554CF171DFCED3000154ABD /* PYConfigManager.h */; };
 		1554CF771DFCEEF700154ABD /* PYEntityAsist.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1554CF1A1DFCED3000154ABD /* PYEntityAsist.h */; };
 		1554CF781DFCEEF700154ABD /* PYEntityManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1554CF1C1DFCED3000154ABD /* PYEntityManager.h */; };
@@ -116,17 +116,17 @@
 		1554CF1D1DFCED3000154ABD /* PYEntityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYEntityManager.m; sourceTree = "<group>"; };
 		1554CF1E1DFCED3000154ABD /* PYEntitySql.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYEntitySql.h; sourceTree = "<group>"; };
 		1554CF1F1DFCED3000154ABD /* PYEntitySql.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYEntitySql.m; sourceTree = "<group>"; };
-		1554CF211DFCED3000154ABD /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		1554CF221DFCED3000154ABD /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		1554CF231DFCED3000154ABD /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		1554CF241DFCED3000154ABD /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		1554CF251DFCED3000154ABD /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		1554CF261DFCED3000154ABD /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		1554CF271DFCED3000154ABD /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		1554CF281DFCED3000154ABD /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		1554CF291DFCED3000154ABD /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		1554CF2A1DFCED3000154ABD /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		1554CF2B1DFCED3000154ABD /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		1554CF211DFCED3000154ABD /* PYIPADatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYIPADatabase.h; sourceTree = "<group>"; };
+		1554CF221DFCED3000154ABD /* PYIPADatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYIPADatabase.m; sourceTree = "<group>"; };
+		1554CF231DFCED3000154ABD /* PYIPADatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYIPADatabaseAdditions.h; sourceTree = "<group>"; };
+		1554CF241DFCED3000154ABD /* PYIPADatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYIPADatabaseAdditions.m; sourceTree = "<group>"; };
+		1554CF251DFCED3000154ABD /* PYIPADatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYIPADatabasePool.h; sourceTree = "<group>"; };
+		1554CF261DFCED3000154ABD /* PYIPADatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYIPADatabasePool.m; sourceTree = "<group>"; };
+		1554CF271DFCED3000154ABD /* PYIPADatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYIPADatabaseQueue.h; sourceTree = "<group>"; };
+		1554CF281DFCED3000154ABD /* PYIPADatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYIPADatabaseQueue.m; sourceTree = "<group>"; };
+		1554CF291DFCED3000154ABD /* PYIPADB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYIPADB.h; sourceTree = "<group>"; };
+		1554CF2A1DFCED3000154ABD /* PYIPAResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYIPAResultSet.h; sourceTree = "<group>"; };
+		1554CF2B1DFCED3000154ABD /* PYIPAResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYIPAResultSet.m; sourceTree = "<group>"; };
 		1554CF361DFCED4C00154ABD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1554CF601DFCEE8300154ABD /* libpyipaa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpyipaa.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1554CF621DFCEE8300154ABD /* pyipaa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pyipaa.h; sourceTree = "<group>"; };
@@ -201,6 +201,24 @@
 			path = PYUtile;
 			sourceTree = "<group>";
 		};
+		1521DC2C226EB2E800CBED0C /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				15E3EB702159E10E005A431F /* EventManager */,
+				1554CF161DFCED3000154ABD /* ConfigManager */,
+				1554CF191DFCED3000154ABD /* EntityManager */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		1521DC2D226EB2FA00CBED0C /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				1554CF201DFCED3000154ABD /* PYDB */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		1554CEF21DFCECC500154ABD = {
 			isa = PBXGroup;
 			children = (
@@ -251,10 +269,8 @@
 		1554CF151DFCED3000154ABD /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				15E3EB702159E10E005A431F /* EventManager */,
-				1554CF161DFCED3000154ABD /* ConfigManager */,
-				1554CF191DFCED3000154ABD /* EntityManager */,
-				1554CF201DFCED3000154ABD /* FMDB */,
+				1521DC2D226EB2FA00CBED0C /* Private */,
+				1521DC2C226EB2E800CBED0C /* Public */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -281,22 +297,22 @@
 			path = EntityManager;
 			sourceTree = "<group>";
 		};
-		1554CF201DFCED3000154ABD /* FMDB */ = {
+		1554CF201DFCED3000154ABD /* PYDB */ = {
 			isa = PBXGroup;
 			children = (
-				1554CF211DFCED3000154ABD /* FMDatabase.h */,
-				1554CF221DFCED3000154ABD /* FMDatabase.m */,
-				1554CF231DFCED3000154ABD /* FMDatabaseAdditions.h */,
-				1554CF241DFCED3000154ABD /* FMDatabaseAdditions.m */,
-				1554CF251DFCED3000154ABD /* FMDatabasePool.h */,
-				1554CF261DFCED3000154ABD /* FMDatabasePool.m */,
-				1554CF271DFCED3000154ABD /* FMDatabaseQueue.h */,
-				1554CF281DFCED3000154ABD /* FMDatabaseQueue.m */,
-				1554CF291DFCED3000154ABD /* FMDB.h */,
-				1554CF2A1DFCED3000154ABD /* FMResultSet.h */,
-				1554CF2B1DFCED3000154ABD /* FMResultSet.m */,
+				1554CF211DFCED3000154ABD /* PYIPADatabase.h */,
+				1554CF221DFCED3000154ABD /* PYIPADatabase.m */,
+				1554CF231DFCED3000154ABD /* PYIPADatabaseAdditions.h */,
+				1554CF241DFCED3000154ABD /* PYIPADatabaseAdditions.m */,
+				1554CF251DFCED3000154ABD /* PYIPADatabasePool.h */,
+				1554CF261DFCED3000154ABD /* PYIPADatabasePool.m */,
+				1554CF271DFCED3000154ABD /* PYIPADatabaseQueue.h */,
+				1554CF281DFCED3000154ABD /* PYIPADatabaseQueue.m */,
+				1554CF291DFCED3000154ABD /* PYIPADB.h */,
+				1554CF2A1DFCED3000154ABD /* PYIPAResultSet.h */,
+				1554CF2B1DFCED3000154ABD /* PYIPAResultSet.m */,
 			);
-			path = FMDB;
+			path = PYDB;
 			sourceTree = "<group>";
 		};
 		1554CF351DFCED4C00154ABD /* Frameworks */ = {
@@ -427,14 +443,14 @@
 				1554CF2D1DFCED3000154ABD /* PYEntityAsist.m in Sources */,
 				1554CF2C1DFCED3000154ABD /* PYConfigManager.m in Sources */,
 				1554CF001DFCECC500154ABD /* main.m in Sources */,
-				1554CF311DFCED3000154ABD /* FMDatabaseAdditions.m in Sources */,
+				1554CF311DFCED3000154ABD /* PYIPADatabaseAdditions.m in Sources */,
 				15E3EB732159E140005A431F /* PYEventManager.m in Sources */,
-				1554CF341DFCED3000154ABD /* FMResultSet.m in Sources */,
+				1554CF341DFCED3000154ABD /* PYIPAResultSet.m in Sources */,
 				1554CF2F1DFCED3000154ABD /* PYEntitySql.m in Sources */,
-				1554CF321DFCED3000154ABD /* FMDatabasePool.m in Sources */,
-				1554CF331DFCED3000154ABD /* FMDatabaseQueue.m in Sources */,
+				1554CF321DFCED3000154ABD /* PYIPADatabasePool.m in Sources */,
+				1554CF331DFCED3000154ABD /* PYIPADatabaseQueue.m in Sources */,
 				1554CF2E1DFCED3000154ABD /* PYEntityManager.m in Sources */,
-				1554CF301DFCED3000154ABD /* FMDatabase.m in Sources */,
+				1554CF301DFCED3000154ABD /* PYIPADatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,11 +463,11 @@
 				1554CF6E1DFCEEE800154ABD /* PYEntityAsist.m in Sources */,
 				1554CF6F1DFCEEE800154ABD /* PYEntityManager.m in Sources */,
 				1554CF701DFCEEE800154ABD /* PYEntitySql.m in Sources */,
-				1554CF711DFCEEE800154ABD /* FMDatabase.m in Sources */,
-				1554CF721DFCEEE800154ABD /* FMDatabaseAdditions.m in Sources */,
-				1554CF731DFCEEE800154ABD /* FMDatabasePool.m in Sources */,
-				1554CF741DFCEEE800154ABD /* FMDatabaseQueue.m in Sources */,
-				1554CF751DFCEEE800154ABD /* FMResultSet.m in Sources */,
+				1554CF711DFCEEE800154ABD /* PYIPADatabase.m in Sources */,
+				1554CF721DFCEEE800154ABD /* PYIPADatabaseAdditions.m in Sources */,
+				1554CF731DFCEEE800154ABD /* PYIPADatabasePool.m in Sources */,
+				1554CF741DFCEEE800154ABD /* PYIPADatabaseQueue.m in Sources */,
+				1554CF751DFCEEE800154ABD /* PYIPAResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

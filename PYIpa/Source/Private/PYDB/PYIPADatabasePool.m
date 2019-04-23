@@ -1,23 +1,23 @@
 //
-//  FMDatabasePool.m
-//  fmdb
+//  PYIPADatabasePool.m
+//  PYIPADB
 //
 //  Created by August Mueller on 6/22/11.
 //  Copyright 2011 Flying Meat Inc. All rights reserved.
 //
 
-#import "FMDatabasePool.h"
-#import "FMDatabase.h"
+#import "PYIPADatabasePool.h"
+#import "PYIPADatabase.h"
 
-@interface FMDatabasePool()
+@interface PYIPADatabasePool()
 
-- (void)pushDatabaseBackInPool:(FMDatabase*)db;
-- (FMDatabase*)db;
+- (void)pushDatabaseBackInPool:(PYIPADatabase*)db;
+- (PYIPADatabase*)db;
 
 @end
 
 
-@implementation FMDatabasePool
+@implementation PYIPADatabasePool
 @synthesize path=_path;
 @synthesize delegate=_delegate;
 @synthesize maximumNumberOfDatabasesToCreate=_maximumNumberOfDatabasesToCreate;
@@ -25,11 +25,11 @@
 
 
 + (instancetype)databasePoolWithPath:(NSString*)aPath {
-    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath]);
+    return PYIPADBReturnAutoreleased([[self alloc] initWithPath:aPath]);
 }
 
 + (instancetype)databasePoolWithPath:(NSString*)aPath flags:(int)openFlags {
-    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags]);
+    return PYIPADBReturnAutoreleased([[self alloc] initWithPath:aPath flags:openFlags]);
 }
 
 - (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags {
@@ -38,9 +38,9 @@
     
     if (self != nil) {
         _path               = [aPath copy];
-        _lockQueue          = dispatch_queue_create([[NSString stringWithFormat:@"fmdb.%@", self] UTF8String], NULL);
-        _databaseInPool     = FMDBReturnRetained([NSMutableArray array]);
-        _databaseOutPool    = FMDBReturnRetained([NSMutableArray array]);
+        _lockQueue          = dispatch_queue_create([[NSString stringWithFormat:@"PYIPADB.%@", self] UTF8String], NULL);
+        _databaseInPool     = PYIPADBReturnRetained([NSMutableArray array]);
+        _databaseOutPool    = PYIPADBReturnRetained([NSMutableArray array]);
         _openFlags          = openFlags;
     }
     
@@ -61,12 +61,12 @@
 - (void)dealloc {
     
     _delegate = 0x00;
-    FMDBRelease(_path);
-    FMDBRelease(_databaseInPool);
-    FMDBRelease(_databaseOutPool);
+    PYIPADBRelease(_path);
+    PYIPADBRelease(_databaseInPool);
+    PYIPADBRelease(_databaseOutPool);
     
     if (_lockQueue) {
-        FMDBDispatchQueueRelease(_lockQueue);
+        PYIPADBDispatchQueueRelease(_lockQueue);
         _lockQueue = 0x00;
     }
 #if ! __has_feature(objc_arc)
@@ -79,7 +79,7 @@
     dispatch_sync(_lockQueue, aBlock);
 }
 
-- (void)pushDatabaseBackInPool:(FMDatabase*)db {
+- (void)pushDatabaseBackInPool:(PYIPADatabase*)db {
     
     if (!db) { // db can be null if we set an upper bound on the # of databases to create.
         return;
@@ -88,7 +88,7 @@
     [self executeLocked:^() {
         
         if ([_databaseInPool containsObject:db]) {
-            [[NSException exceptionWithName:@"Database already in pool" reason:@"The FMDatabase being put back into the pool is already present in the pool" userInfo:nil] raise];
+            [[NSException exceptionWithName:@"Database already in pool" reason:@"The PYIPADatabase being put back into the pool is already present in the pool" userInfo:nil] raise];
         }
         
         [_databaseInPool addObject:db];
@@ -97,9 +97,9 @@
     }];
 }
 
-- (FMDatabase*)db {
+- (PYIPADatabase*)db {
     
-    __block FMDatabase *db;
+    __block PYIPADatabase *db;
     
     
     [self executeLocked:^() {
@@ -122,7 +122,7 @@
                 }
             }
             
-            db = [FMDatabase databaseWithPath:_path];
+            db = [PYIPADatabase databaseWithPath:_path];
             shouldNotifyDelegate = YES;
         }
         
@@ -196,20 +196,20 @@
     }];
 }
 
-- (void)inDatabase:(void (^)(FMDatabase *db))block {
+- (void)inDatabase:(void (^)(PYIPADatabase *db))block {
     
-    FMDatabase *db = [self db];
+    PYIPADatabase *db = [self db];
     
     block(db);
     
     [self pushDatabaseBackInPool:db];
 }
 
-- (void)beginTransaction:(BOOL)useDeferred withBlock:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (void)beginTransaction:(BOOL)useDeferred withBlock:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
     
     BOOL shouldRollback = NO;
     
-    FMDatabase *db = [self db];
+    PYIPADatabase *db = [self db];
     
     if (useDeferred) {
         [db beginDeferredTransaction];
@@ -231,15 +231,15 @@
     [self pushDatabaseBackInPool:db];
 }
 
-- (void)inDeferredTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (void)inDeferredTransaction:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
     [self beginTransaction:YES withBlock:block];
 }
 
-- (void)inTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (void)inTransaction:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
     [self beginTransaction:NO withBlock:block];
 }
 #if SQLITE_VERSION_NUMBER >= 3007000
-- (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (NSError*)inSavePoint:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
     
     static unsigned long savePointIdx = 0;
     
@@ -247,7 +247,7 @@
     
     BOOL shouldRollback = NO;
     
-    FMDatabase *db = [self db];
+    PYIPADatabase *db = [self db];
     
     NSError *err = 0x00;
     

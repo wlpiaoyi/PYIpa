@@ -8,14 +8,14 @@
 
 #import "PYEntityManager.h"
 #import "PYEntitySql.h"
-#import "FMDB.h"
+#import "PYIPADB.h"
 #import "pyutilea.h"
 #import <objc/runtime.h>
 
 
 
 @interface PYDataBaseManager()
-@property (nonatomic,strong) FMDatabase *dataBase;
+@property (nonatomic,strong) PYIPADatabase *dataBase;
 
 @end
 
@@ -53,7 +53,7 @@
     if (![self open]) {
         return NO;
     }
-    FMResultSet *result;
+    PYIPAResultSet *result;
     if (params&&[params count]) {
         result = [self.dataBase executeQuery:sql withArgumentsInArray:params];
     }else{

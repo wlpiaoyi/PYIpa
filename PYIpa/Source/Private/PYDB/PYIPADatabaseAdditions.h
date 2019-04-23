@@ -1,23 +1,23 @@
 //
-//  FMDatabaseAdditions.h
-//  fmdb
+//  PYIPADatabaseAdditions.h
+//  PYIPADB
 //
 //  Created by August Mueller on 10/30/05.
 //  Copyright 2005 Flying Meat Inc.. All rights reserved.
 //
 
 
-#import "FMDatabase.h"
+#import "PYIPADatabase.h"
 
 
-/** Category of additions for `<FMDatabase>` class.
+/** Category of additions for `<PYIPADatabase>` class.
  
  ### See also
 
- - `<FMDatabase>`
+ - `<PYIPADatabase>`
  */
 
-@interface FMDatabase (FMDatabaseAdditions)
+@interface PYIPADatabase (PYIPADatabaseAdditions)
 
 ///----------------------------------------
 /// @name Return results of SQL to variable
@@ -122,12 +122,12 @@
  - `rootpage` - The page number of the root b-tree page for tables and indices
  - `sql` - The SQL that created the entity
 
- @return `FMResultSet` of schema; `nil` on error.
+ @return `PYIPAResultSet` of schema; `nil` on error.
  
  @see [SQLite File Format](http://www.sqlite.org/fileformat.html)
  */
 
-- (FMResultSet*)getSchema;
+- (PYIPAResultSet*)getSchema;
 
 /** The schema of the database.
 
@@ -146,12 +146,12 @@
 
  @param tableName The name of the table for whom the schema will be returned.
  
- @return `FMResultSet` of schema; `nil` on error.
+ @return `PYIPAResultSet` of schema; `nil` on error.
  
  @see [table_info](http://www.sqlite.org/pragma.html#pragma_table_info)
  */
 
-- (FMResultSet*)getTableSchema:(NSString*)tableName;
+- (PYIPAResultSet*)getTableSchema:(NSString*)tableName;
 
 /** Test to see if particular column exists for particular table in database
  

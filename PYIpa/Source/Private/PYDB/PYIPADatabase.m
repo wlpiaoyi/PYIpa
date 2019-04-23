@@ -1,14 +1,14 @@
-#import "FMDatabase.h"
+#import "PYIPADatabase.h"
 #import "unistd.h"
 #import <objc/runtime.h>
 
-@interface FMDatabase ()
+@interface PYIPADatabase ()
 
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args;
+- (PYIPAResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args;
 - (sqlite3_int64)executeUpdate:(NSString*)sql error:(NSError**)outErr withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args;
 @end
 
-@implementation FMDatabase
+@implementation PYIPADatabase
 @synthesize cachedStatements=_cachedStatements;
 @synthesize logsErrors=_logsErrors;
 @synthesize crashOnErrors=_crashOnErrors;
@@ -16,7 +16,7 @@
 @synthesize checkedOut=_checkedOut;
 @synthesize traceExecution=_traceExecution;
 + (instancetype)databaseWithPath:(NSString*)aPath {
-    return FMDBReturnAutoreleased([[self alloc] initWithPath:aPath]);
+    return PYIPADBReturnAutoreleased([[self alloc] initWithPath:aPath]);
 }
 
 + (NSString*)sqliteLibVersion {
@@ -57,11 +57,11 @@
 
 - (void)dealloc {
     [self close];
-    FMDBRelease(_openResultSets);
-    FMDBRelease(_cachedStatements);
-    FMDBRelease(_dateFormat);
-    FMDBRelease(_databasePath);
-    FMDBRelease(_openFunctions);
+    PYIPADBRelease(_openResultSets);
+    PYIPADBRelease(_cachedStatements);
+    PYIPADBRelease(_dateFormat);
+    PYIPADBRelease(_databasePath);
+    PYIPADBRelease(_openFunctions);
     
 #if ! __has_feature(objc_arc)
     [super dealloc];
@@ -180,17 +180,17 @@
 
 
 // we no longer make busyRetryTimeout public
-// but for folks who don't bother noticing that the interface to FMDatabase changed,
+// but for folks who don't bother noticing that the interface to PYIPADatabase changed,
 // we'll still implement the method so they don't get suprise crashes
 - (int)busyRetryTimeout {
     NSLog(@"%s:%d", __FUNCTION__, __LINE__);
-    NSLog(@"FMDB: busyRetryTimeout no longer works, please use retryTimeout");
+    NSLog(@"PYIPADB: busyRetryTimeout no longer works, please use retryTimeout");
     return -1;
 }
 
 - (void)setBusyRetryTimeout:(int)i {
     NSLog(@"%s:%d", __FUNCTION__, __LINE__);
-    NSLog(@"FMDB: setBusyRetryTimeout does nothing, please use setRetryTimeout:");
+    NSLog(@"PYIPADB: setBusyRetryTimeout does nothing, please use setRetryTimeout:");
 }
 
 
@@ -212,9 +212,9 @@
 - (void)closeOpenResultSets {
     
     //Copy the set so we don't get mutation errors
-    NSSet *openSetCopy = FMDBReturnAutoreleased([_openResultSets copy]);
+    NSSet *openSetCopy = PYIPADBReturnAutoreleased([_openResultSets copy]);
     for (NSValue *rsInWrappedInATastyValueMeal in openSetCopy) {
-        FMResultSet *rs = (FMResultSet *)[rsInWrappedInATastyValueMeal pointerValue];
+        PYIPAResultSet *rs = (PYIPAResultSet *)[rsInWrappedInATastyValueMeal pointerValue];
         
         [rs setParentDB:nil];
         [rs close];
@@ -223,17 +223,17 @@
     }
 }
 
-- (void)resultSetDidClose:(FMResultSet *)resultSet {
+- (void)resultSetDidClose:(PYIPAResultSet *)resultSet {
     NSValue *setValue = [NSValue valueWithNonretainedObject:resultSet];
     
     [_openResultSets removeObject:setValue];
 }
 
-- (FMStatement*)cachedStatementForQuery:(NSString*)query {
+- (PYIPAStatement*)cachedStatementForQuery:(NSString*)query {
     
     NSMutableSet* statements = [_cachedStatements objectForKey:query];
     
-    return [[statements objectsPassingTest:^BOOL(FMStatement* statement, BOOL *stop) {
+    return [[statements objectsPassingTest:^BOOL(PYIPAStatement* statement, BOOL *stop) {
         
         *stop = ![statement inUse];
         return *stop;
@@ -242,7 +242,7 @@
 }
 
 
-- (void)setCachedStatement:(FMStatement*)statement forQuery:(NSString*)query {
+- (void)setCachedStatement:(PYIPAStatement*)statement forQuery:(NSString*)query {
     
     query = [query copy]; // in case we got handed in a mutable string...
     [statement setQuery:query];
@@ -256,7 +256,7 @@
     
     [_cachedStatements setObject:statements forKey:query];
     
-    FMDBRelease(query);
+    PYIPADBRelease(query);
 }
 
 - (BOOL)rekey:(NSString*)key {
@@ -306,10 +306,10 @@
 
 + (NSDateFormatter *)storeableDateFormat:(NSString *)format {
     
-    NSDateFormatter *result = FMDBReturnAutoreleased([[NSDateFormatter alloc] init]);
+    NSDateFormatter *result = PYIPADBReturnAutoreleased([[NSDateFormatter alloc] init]);
     result.dateFormat = format;
     result.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    result.locale = FMDBReturnAutoreleased([[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]);
+    result.locale = PYIPADBReturnAutoreleased([[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]);
     return result;
 }
 
@@ -319,8 +319,8 @@
 }
 
 - (void)setDateFormat:(NSDateFormatter *)format {
-    FMDBAutorelease(_dateFormat);
-    _dateFormat = FMDBReturnRetained(format);
+    PYIPADBAutorelease(_dateFormat);
+    _dateFormat = PYIPADBReturnRetained(format);
 }
 
 - (NSDate *)dateFromString:(NSString *)s {
@@ -338,7 +338,7 @@
         return NO;
     }
     
-    FMResultSet *rs = [self executeQuery:@"select name from sqlite_master where type='table'"];
+    PYIPAResultSet *rs = [self executeQuery:@"select name from sqlite_master where type='table'"];
     
     if (rs) {
         [rs close];
@@ -349,11 +349,11 @@
 }
 
 - (void)warnInUse {
-    NSLog(@"The FMDatabase %@ is currently in use.", self);
+    NSLog(@"The PYIPADatabase %@ is currently in use.", self);
     
 #ifndef NS_BLOCK_ASSERTIONS
     if (_crashOnErrors) {
-        NSAssert(false, @"The FMDatabase %@ is currently in use.", self);
+        NSAssert(false, @"The PYIPADatabase %@ is currently in use.", self);
         abort();
     }
 #endif
@@ -363,11 +363,11 @@
     
     if (!_db) {
             
-        NSLog(@"The FMDatabase %@ is not open.", self);
+        NSLog(@"The PYIPADatabase %@ is not open.", self);
         
     #ifndef NS_BLOCK_ASSERTIONS
         if (_crashOnErrors) {
-            NSAssert(false, @"The FMDatabase %@ is not open.", self);
+            NSAssert(false, @"The PYIPADatabase %@ is not open.", self);
             abort();
         }
     #endif
@@ -396,7 +396,7 @@
 - (NSError*)errorWithMessage:(NSString*)message {
     NSDictionary* errorMessage = [NSDictionary dictionaryWithObject:message forKey:NSLocalizedDescriptionKey];
     
-    return [NSError errorWithDomain:@"FMDatabase" code:sqlite3_errcode(_db) userInfo:errorMessage];    
+    return [NSError errorWithDomain:@"PYIPADatabase" code:sqlite3_errcode(_db) userInfo:errorMessage];    
 }
 
 - (NSError*)lastError {
@@ -626,11 +626,11 @@
     }
 }
 
-- (FMResultSet *)executeQuery:(NSString *)sql withParameterDictionary:(NSDictionary *)arguments {
+- (PYIPAResultSet *)executeQuery:(NSString *)sql withParameterDictionary:(NSDictionary *)arguments {
     return [self executeQuery:sql withArgumentsInArray:nil orDictionary:arguments orVAList:nil];
 }
 
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args {
+- (PYIPAResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args {
     
     if (![self databaseExists]) {
         return 0x00;
@@ -645,8 +645,8 @@
     
     int rc                  = 0x00;
     sqlite3_stmt *pStmt     = 0x00;
-    FMStatement *statement  = 0x00;
-    FMResultSet *rs         = 0x00;
+    PYIPAStatement *statement  = 0x00;
+    PYIPAResultSet *rs         = 0x00;
     
     if (_traceExecution && sql) {
         NSLog(@"%@ executeQuery: %@", self, sql);
@@ -695,7 +695,7 @@
             // Get the index for the parameter name.
             int namedIdx = sqlite3_bind_parameter_index(pStmt, [parameterName UTF8String]);
             
-            FMDBRelease(parameterName);
+            PYIPADBRelease(parameterName);
             
             if (namedIdx > 0) {
                 // Standard binding from here.
@@ -745,10 +745,10 @@
         return nil;
     }
     
-    FMDBRetain(statement); // to balance the release below
+    PYIPADBRetain(statement); // to balance the release below
     
     if (!statement) {
-        statement = [[FMStatement alloc] init];
+        statement = [[PYIPAStatement alloc] init];
         [statement setStatement:pStmt];
         
         if (_shouldCacheStatements && sql) {
@@ -757,7 +757,7 @@
     }
     
     // the statement gets closed in rs's dealloc or [rs close];
-    rs = [FMResultSet resultSetWithStatement:statement usingParentDatabase:self];
+    rs = [PYIPAResultSet resultSetWithStatement:statement usingParentDatabase:self];
     [rs setQuery:sql];
     
     NSValue *openResultSet = [NSValue valueWithNonretainedObject:rs];
@@ -765,14 +765,14 @@
     
     [statement setUseCount:[statement useCount] + 1];
     
-    FMDBRelease(statement); 
+    PYIPADBRelease(statement);
     
     _isExecutingStatement = NO;
     
     return rs;
 }
 
-- (FMResultSet *)executeQuery:(NSString*)sql, ... {
+- (PYIPAResultSet *)executeQuery:(NSString*)sql, ... {
     va_list args;
     va_start(args, sql);
     
@@ -782,7 +782,7 @@
     return result;
 }
 
-- (FMResultSet *)executeQueryWithFormat:(NSString*)format, ... {
+- (PYIPAResultSet *)executeQueryWithFormat:(NSString*)format, ... {
     va_list args;
     va_start(args, format);
     
@@ -795,11 +795,11 @@
     return [self executeQuery:sql withArgumentsInArray:arguments];
 }
 
-- (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments {
+- (PYIPAResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments {
     return [self executeQuery:sql withArgumentsInArray:arguments orDictionary:nil orVAList:nil];
 }
 
-- (FMResultSet *)executeQuery:(NSString*)sql withVAList:(va_list)args {
+- (PYIPAResultSet *)executeQuery:(NSString*)sql withVAList:(va_list)args {
     return [self executeQuery:sql withArgumentsInArray:nil orDictionary:nil orVAList:args];
 }
 
@@ -818,7 +818,7 @@
     
     int rc                   = 0x00;
     sqlite3_stmt *pStmt      = 0x00;
-    FMStatement *cachedStmt  = 0x00;
+    PYIPAStatement *cachedStmt  = 0x00;
     
     if (_traceExecution && sql) {
         NSLog(@"%@ executeUpdate: %@", self, sql);
@@ -871,7 +871,7 @@
             // Get the index for the parameter name.
             int namedIdx = sqlite3_bind_parameter_index(pStmt, [parameterName UTF8String]);
             
-            FMDBRelease(parameterName);
+            PYIPADBRelease(parameterName);
             
             if (namedIdx > 0) {
                 // Standard binding from here.
@@ -964,13 +964,13 @@
     }
     
     if (_shouldCacheStatements && !cachedStmt) {
-        cachedStmt = [[FMStatement alloc] init];
+        cachedStmt = [[PYIPAStatement alloc] init];
         
         [cachedStmt setStatement:pStmt];
         
         [self setCachedStatement:cachedStmt forQuery:sql];
         
-        FMDBRelease(cachedStmt);
+        PYIPADBRelease(cachedStmt);
     }
     
     int closeErrorCode;
@@ -1090,7 +1090,7 @@
 
 #if SQLITE_VERSION_NUMBER >= 3007000
 
-static NSString *FMEscapeSavePointName(NSString *savepointName) {
+static NSString *IPAEscapeSavePointName(NSString *savepointName) {
     return [savepointName stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
 }
 
@@ -1098,7 +1098,7 @@ static NSString *FMEscapeSavePointName(NSString *savepointName) {
     
     NSParameterAssert(name);
     
-    NSString *sql = [NSString stringWithFormat:@"savepoint '%@';", FMEscapeSavePointName(name)];
+    NSString *sql = [NSString stringWithFormat:@"savepoint '%@';", IPAEscapeSavePointName(name)];
     
     if (![self executeUpdate:sql]) {
 
@@ -1116,7 +1116,7 @@ static NSString *FMEscapeSavePointName(NSString *savepointName) {
     
     NSParameterAssert(name);
     
-    NSString *sql = [NSString stringWithFormat:@"release savepoint '%@';", FMEscapeSavePointName(name)];
+    NSString *sql = [NSString stringWithFormat:@"release savepoint '%@';", IPAEscapeSavePointName(name)];
     BOOL worked = [self executeUpdate:sql];
     
     if (!worked && outErr) {
@@ -1130,7 +1130,7 @@ static NSString *FMEscapeSavePointName(NSString *savepointName) {
     
     NSParameterAssert(name);
     
-    NSString *sql = [NSString stringWithFormat:@"rollback transaction to savepoint '%@';", FMEscapeSavePointName(name)];
+    NSString *sql = [NSString stringWithFormat:@"rollback transaction to savepoint '%@';", IPAEscapeSavePointName(name)];
     BOOL worked = [self executeUpdate:sql];
     
     if (!worked && outErr) {
@@ -1184,8 +1184,8 @@ static NSString *FMEscapeSavePointName(NSString *savepointName) {
     }
 }
 
-void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3_value **argv);
-void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3_value **argv) {
+void PYIPADBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3_value **argv);
+void PYIPADBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3_value **argv) {
 #if ! __has_feature(objc_arc)
     void (^block)(sqlite3_context *context, int argc, sqlite3_value **argv) = (id)sqlite3_user_data(context);
 #else
@@ -1201,15 +1201,15 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
         _openFunctions = [NSMutableSet new];
     }
     
-    id b = FMDBReturnAutoreleased([block copy]);
+    id b = PYIPADBReturnAutoreleased([block copy]);
     
     [_openFunctions addObject:b];
     
     /* I tried adding custom functions to release the block when the connection is destroyed- but they seemed to never be called, so we use _openFunctions to store the values instead. */
 #if ! __has_feature(objc_arc)
-    sqlite3_create_function([self sqliteHandle], [name UTF8String], count, SQLITE_UTF8, (void*)b, &FMDBBlockSQLiteCallBackFunction, 0x00, 0x00);
+    sqlite3_create_function([self sqliteHandle], [name UTF8String], count, SQLITE_UTF8, (void*)b, &PYIPADBBlockSQLiteCallBackFunction, 0x00, 0x00);
 #else
-    sqlite3_create_function([self sqliteHandle], [name UTF8String], count, SQLITE_UTF8, (__bridge void*)b, &FMDBBlockSQLiteCallBackFunction, 0x00, 0x00);
+    sqlite3_create_function([self sqliteHandle], [name UTF8String], count, SQLITE_UTF8, (__bridge void*)b, &PYIPADBBlockSQLiteCallBackFunction, 0x00, 0x00);
 #endif
 }
 
@@ -1217,7 +1217,7 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 
 
 
-@implementation FMStatement
+@implementation PYIPAStatement
 @synthesize statement=_statement;
 @synthesize query=_query;
 @synthesize useCount=_useCount;
@@ -1230,7 +1230,7 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 
 - (void)dealloc {
     [self close];
-    FMDBRelease(_query);
+    PYIPADBRelease(_query);
 #if ! __has_feature(objc_arc)
     [super dealloc];
 #endif

@@ -1,54 +1,54 @@
 //
-//  FMDatabaseQueue.m
-//  fmdb
+//  PYIPADatabaseQueue.m
+//  PYIPADB
 //
 //  Created by August Mueller on 6/22/11.
 //  Copyright 2011 Flying Meat Inc. All rights reserved.
 //
 
-#import "FMDatabaseQueue.h"
-#import "FMDatabase.h"
+#import "PYIPADatabaseQueue.h"
+#import "PYIPADatabase.h"
 
 /*
  
  Note: we call [self retain]; before using dispatch_sync, just incase 
- FMDatabaseQueue is released on another thread and we're in the middle of doing
+ PYIPADatabaseQueue is released on another thread and we're in the middle of doing
  something in dispatch_sync
  
  */
 
 /**
- * A key used to associate the FMDatabaseQueue object with the dispatch_queue_t it uses.
+ * A key used to associate the PYIPADatabaseQueue object with the dispatch_queue_t it uses.
  * This in turn is used for deadlock detection by seeing if inDatabase: is called on
  * the queue's dispatch queue, which should not happen and causes a deadlock.
  */
 static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey;
  
-@implementation FMDatabaseQueue
+@implementation PYIPADatabaseQueue
 
 @synthesize path = _path;
 @synthesize openFlags = _openFlags;
 
 + (instancetype)databaseQueueWithPath:(NSString*)aPath {
     
-    FMDatabaseQueue *q = [[self alloc] initWithPath:aPath];
+    PYIPADatabaseQueue *q = [[self alloc] initWithPath:aPath];
     
-    FMDBAutorelease(q);
+    PYIPADBAutorelease(q);
     
     return q;
 }
 
 + (instancetype)databaseQueueWithPath:(NSString*)aPath flags:(int)openFlags {
     
-    FMDatabaseQueue *q = [[self alloc] initWithPath:aPath flags:openFlags];
+    PYIPADatabaseQueue *q = [[self alloc] initWithPath:aPath flags:openFlags];
     
-    FMDBAutorelease(q);
+    PYIPADBAutorelease(q);
     
     return q;
 }
 
 + (Class)databaseClass {
-    return [FMDatabase class];
+    return [PYIPADatabase class];
 }
 
 - (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags {
@@ -58,7 +58,7 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     if (self != nil) {
         
         _db = [[[self class] databaseClass] databaseWithPath:aPath];
-        FMDBRetain(_db);
+        PYIPADBRetain(_db);
         
 #if SQLITE_VERSION_NUMBER >= 3005000
         BOOL success = [_db openWithFlags:openFlags];
@@ -67,13 +67,13 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
 #endif
         if (!success) {
             NSLog(@"Could not create database queue for path %@", aPath);
-            FMDBRelease(self);
+            PYIPADBRelease(self);
             return 0x00;
         }
         
-        _path = FMDBReturnRetained(aPath);
+        _path = PYIPADBReturnRetained(aPath);
         
-        _queue = dispatch_queue_create([[NSString stringWithFormat:@"fmdb.%@", self] UTF8String], NULL);
+        _queue = dispatch_queue_create([[NSString stringWithFormat:@"PYIPADB.%@", self] UTF8String], NULL);
         dispatch_queue_set_specific(_queue, kDispatchQueueSpecificKey, (__bridge void *)self, NULL);
         _openFlags = openFlags;
     }
@@ -94,11 +94,11 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     
 - (void)dealloc {
     
-    FMDBRelease(_db);
-    FMDBRelease(_path);
+    PYIPADBRelease(_db);
+    PYIPADBRelease(_path);
     
     if (_queue) {
-        FMDBDispatchQueueRelease(_queue);
+        PYIPADBDispatchQueueRelease(_queue);
         _queue = 0x00;
     }
 #if ! __has_feature(objc_arc)
@@ -107,18 +107,18 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
 }
 
 - (void)close {
-    FMDBRetain(self);
+    PYIPADBRetain(self);
     dispatch_sync(_queue, ^() { 
         [_db close];
-        FMDBRelease(_db);
+        PYIPADBRelease(_db);
         _db = 0x00;
     });
-    FMDBRelease(self);
+    PYIPADBRelease(self);
 }
 
-- (FMDatabase*)database {
+- (PYIPADatabase*)database {
     if (!_db) {
-        _db = FMDBReturnRetained([FMDatabase databaseWithPath:_path]);
+        _db = PYIPADBReturnRetained([PYIPADatabase databaseWithPath:_path]);
         
 #if SQLITE_VERSION_NUMBER >= 3005000
         BOOL success = [_db openWithFlags:_openFlags];
@@ -126,8 +126,8 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
         BOOL success = [db open];
 #endif
         if (!success) {
-            NSLog(@"FMDatabaseQueue could not reopen database for path %@", _path);
-            FMDBRelease(_db);
+            NSLog(@"PYIPADatabaseQueue could not reopen database for path %@", _path);
+            PYIPADBRelease(_db);
             _db  = 0x00;
             return 0x00;
         }
@@ -136,38 +136,38 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     return _db;
 }
 
-- (void)inDatabase:(void (^)(FMDatabase *db))block {
+- (void)inDatabase:(void (^)(PYIPADatabase *db))block {
     /* Get the currently executing queue (which should probably be nil, but in theory could be another DB queue
      * and then check it against self to make sure we're not about to deadlock. */
-    FMDatabaseQueue *currentSyncQueue = (__bridge id)dispatch_get_specific(kDispatchQueueSpecificKey);
+    PYIPADatabaseQueue *currentSyncQueue = (__bridge id)dispatch_get_specific(kDispatchQueueSpecificKey);
     assert(currentSyncQueue != self && "inDatabase: was called reentrantly on the same queue, which would lead to a deadlock");
     
-    FMDBRetain(self);
+    PYIPADBRetain(self);
     
     dispatch_sync(_queue, ^() {
         
-        FMDatabase *db = [self database];
+        PYIPADatabase *db = [self database];
         block(db);
         
         if ([db hasOpenResultSets]) {
-            NSLog(@"Warning: there is at least one open result set around after performing [FMDatabaseQueue inDatabase:]");
+            NSLog(@"Warning: there is at least one open result set around after performing [PYIPADatabaseQueue inDatabase:]");
             
 #ifdef DEBUG
-            NSSet *openSetCopy = FMDBReturnAutoreleased([[db valueForKey:@"_openResultSets"] copy]);
+            NSSet *openSetCopy = PYIPADBReturnAutoreleased([[db valueForKey:@"_openResultSets"] copy]);
             for (NSValue *rsInWrappedInATastyValueMeal in openSetCopy) {
-                FMResultSet *rs = (FMResultSet *)[rsInWrappedInATastyValueMeal pointerValue];
+                PYIPAResultSet *rs = (PYIPAResultSet *)[rsInWrappedInATastyValueMeal pointerValue];
                 NSLog(@"query: '%@'", [rs query]);
             }
 #endif
         }
     });
     
-    FMDBRelease(self);
+    PYIPADBRelease(self);
 }
 
 
-- (void)beginTransaction:(BOOL)useDeferred withBlock:(void (^)(FMDatabase *db, BOOL *rollback))block {
-    FMDBRetain(self);
+- (void)beginTransaction:(BOOL)useDeferred withBlock:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
+    PYIPADBRetain(self);
     dispatch_sync(_queue, ^() { 
         
         BOOL shouldRollback = NO;
@@ -189,23 +189,23 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
         }
     });
     
-    FMDBRelease(self);
+    PYIPADBRelease(self);
 }
 
-- (void)inDeferredTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (void)inDeferredTransaction:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
     [self beginTransaction:YES withBlock:block];
 }
 
-- (void)inTransaction:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (void)inTransaction:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
     [self beginTransaction:NO withBlock:block];
 }
 
 #if SQLITE_VERSION_NUMBER >= 3007000
-- (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block {
+- (NSError*)inSavePoint:(void (^)(PYIPADatabase *db, BOOL *rollback))block {
     
     static unsigned long savePointIdx = 0;
     __block NSError *err = 0x00;
-    FMDBRetain(self);
+    PYIPADBRetain(self);
     dispatch_sync(_queue, ^() { 
         
         NSString *name = [NSString stringWithFormat:@"savePoint%ld", savePointIdx++];
@@ -224,7 +224,7 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
             
         }
     });
-    FMDBRelease(self);
+    PYIPADBRelease(self);
     return err;
 }
 #endif
