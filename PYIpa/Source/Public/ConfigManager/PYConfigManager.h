@@ -10,16 +10,21 @@
 
 /**
  可以存储NSDictionary ,NSArray ,NSString ,NSNumber ,NSData ,NSDate class ,(实体对象)
+ 动态方法必须要等到PYConfigManger回收后才会自动持久化
+ 静态方法存储立即持久化
  */
 @interface PYConfigManager : NSObject
 
-+(BOOL) setValue:(id) value key:(NSString*) key;
-+(id) getValue:(NSString*) key;
-+(void) removeValue:(NSString*) key;
-+(void) removeAll;
+-(void) setValue:(nullable id) value forKey:(nonnull NSString*) key;
+-(nullable id) valueForKey:(nonnull NSString*) key;
+-(void) removeValueForKey:(nonnull NSString*) key;
+-(BOOL) removeAll;
+-(BOOL) synchronize;
 
-+(id) getConfigValue:(NSString*) key  NS_DEPRECATED_IOS(2_0, 7_0, "Use setConfigValue:key");
-+(BOOL) setConfigValue:(id) value Key:(NSString*) key  NS_DEPRECATED_IOS(2_0, 7_0, "Use setConfigValue:key");
-+(void) removeConfigValue:(NSString*) key   NS_DEPRECATED_IOS(2_0, 7_0, "Use setConfigValue:key");
-+(void) removeALL   NS_DEPRECATED_IOS(2_0, 7_0, "Use setConfigValue:key");
++(BOOL) setConfigValue:(nullable id) value forKey:(nonnull NSString*) key;
++(nullable id) configValueForKey:(nonnull NSString*) key;
++(void) removeConfigValueForKey:(nonnull NSString*) key;
++(BOOL) removeAllConfig;
+
+
 @end

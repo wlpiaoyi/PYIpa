@@ -34,11 +34,12 @@
     test1 * t1 = [self createTest];
     test1 * t2 = [self createTest];
     NSDictionary * tempd =@{@"t1":t1, @"t2":t2, @"v":@(3)};
-    [PYConfigManager setConfigValue:@[tempd] Key:@"testd"];
-    id tempd2 = [PYConfigManager getConfigValue:@"testd"];
+    [PYConfigManager setConfigValue:@[tempd] forKey:@"testd"];
+    id tempd2 = [PYConfigManager configValueForKey:@"testd"];
     NSArray * a = @[t1, t2];
-    [PYConfigManager setConfigValue:a Key:@"a"];
-    a = [PYConfigManager getConfigValue:@"a"];
+    [PYConfigManager setConfigValue:a forKey:@"a"];
+    a = [PYConfigManager configValueForKey:@"a"];
+    [PYConfigManager removeAllConfig];
     [PYEntityAsist synEntity:@[[PYTestEntity class]] dataBaseName:@"test.db"];
     PYTestEntity * te = [PYTestEntity new];
     te.name = @"我的测试";

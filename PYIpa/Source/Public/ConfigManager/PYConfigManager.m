@@ -10,33 +10,80 @@
 #import "pyutilea.h"
 
 
-const NSString *PYConfigManger_KeyArg = @"PYConfigManger_KeyArg";
-const NSString *PYConfigManger_ValueArg = @"PYConfigManger_ValueArg";
+const NSString *PY_CONFIGDATA_KEY = @"PYConfigManger_KeyArg";
+const NSString *PY_CONFIGDATA_VALUE = @"PYConfigManger_ValueArg";
 
+@interface PYConfigManager ()
+@property (class, readonly, strong) NSUserDefaults *classUsrDefaults;
+@end
 
-@implementation PYConfigManager
-
-+(BOOL) setValue:(id) value key:(NSString*) key{
-    NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
-    [usrDefauls setValue:[self parseValueForSet:value] forKey:key];
-    return [usrDefauls synchronize];
+@implementation PYConfigManager{
+@private NSUserDefaults *usrDefaults;
 }
-+(id) getValue:(NSString*) key{
-    NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
-    id value =  [usrDefauls valueForKey:key];
+
+-(nullable instancetype) init{
+    self = [super init];
+    usrDefaults = [PYConfigManager classUsrDefaults];
+    return self;
+}
+
+-(void) setValue:(nullable id) value forKey:(nonnull NSString*) key{
+    [usrDefaults setValue:[PYConfigManager parseValueForSet:value] forKey:key];
+}
+
+-(nullable id) valueForKey:(nonnull NSString*) key{
+    id value =  [usrDefaults valueForKey:key];
+    return [PYConfigManager parseValueForGet:value];
+}
+
+-(void) removeValueForKey:(nonnull NSString*) key{
+    [usrDefaults removeObjectForKey:key];
+}
+-(BOOL) removeAll{
+    return [PYConfigManager removeAllConfig];
+}
+
+-(BOOL) synchronize{
+    return [usrDefaults synchronize];
+}
+
+-(void) dealloc{
+    [self synchronize];
+}
+
++(BOOL) setConfigValue:(nullable id) value forKey:(nonnull NSString*) key{
+    NSUserDefaults *usrDefaults = [PYConfigManager classUsrDefaults];
+    [usrDefaults setValue:[self parseValueForSet:value] forKey:key];
+    return [usrDefaults synchronize];
+}
++(nullable id) configValueForKey:(nonnull NSString*) key{
+    NSUserDefaults *usrDefaults=[PYConfigManager classUsrDefaults];
+    id value =  [usrDefaults valueForKey:key];
     return [self parseValueForGet:value];
 }
-+(void) removeValue:(NSString*) key{
-    NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
-    [usrDefauls removeObjectForKey:key];
++(void) removeConfigValueForKey:(nonnull NSString*) key{
+    NSUserDefaults *usrDefaults=[PYConfigManager classUsrDefaults];
+    [usrDefaults removeObjectForKey:key];
 }
-+(void) removeAll{
-    NSUserDefaults *usrDefauls=[NSUserDefaults standardUserDefaults];
-    NSDictionary *datas = [usrDefauls dictionaryRepresentation];
++(BOOL) removeAllConfig{
+    NSUserDefaults *usrDefaults=[PYConfigManager classUsrDefaults];
+    [usrDefaults removePersistentDomainForName:kAppBundleIdentifier];
+    if(![usrDefaults synchronize]) return NO;
+    NSDictionary *datas = [usrDefaults dictionaryRepresentation];
     NSArray *keys = [datas allKeys];
     for (NSString *key in keys) {
-        [usrDefauls removeObjectForKey:key];
+        [usrDefaults removeObjectForKey:key];
     }
+    return YES;
+}
+
+
++(nonnull NSUserDefaults *) classUsrDefaults{
+    static NSUserDefaults * __STATIC_USERDEFAULTS;
+    static dispatch_once_t onceToken; dispatch_once(&onceToken, ^{
+        __STATIC_USERDEFAULTS = [NSUserDefaults standardUserDefaults];
+    });
+    return __STATIC_USERDEFAULTS;
 }
 
 +(BOOL) canPersisitForValue:(Class) value{
@@ -74,14 +121,15 @@ const NSString *PYConfigManger_ValueArg = @"PYConfigManger_ValueArg";
         }
         return dict;
     }else{
-        return @{PYConfigManger_KeyArg:NSStringFromClass([((NSObject*)value) class]),PYConfigManger_ValueArg:[value objectToDictionary] };
+        return @{PY_CONFIGDATA_KEY:NSStringFromClass([((NSObject*)value) class]),PY_CONFIGDATA_VALUE:[value objectToDictionary] };
     }
 }
+
 +(id) parseValueForGet:(id) value{
     if (!value)  return nil;
     if ([value isKindOfClass:[NSDictionary class]]) {
-        NSString * tempKeyArg = value[PYConfigManger_KeyArg];
-        id tempValueArg = value[PYConfigManger_ValueArg];
+        NSString * tempKeyArg = value[PY_CONFIGDATA_KEY];
+        id tempValueArg = value[PY_CONFIGDATA_VALUE];
         if(tempKeyArg && tempValueArg){
             Class clazz;
             if (tempKeyArg && tempKeyArg.length && (clazz = NSClassFromString(tempKeyArg))) {
@@ -114,18 +162,5 @@ const NSString *PYConfigManger_ValueArg = @"PYConfigManger_ValueArg";
     
 }
 
-
-+(BOOL) setConfigValue:(id) value Key:(NSString*) key{
-    return [self setValue:value key:key];
-}
-+(id) getConfigValue:(NSString*) key{
-    return [self getValue:key];
-}
-+(void) removeConfigValue:(NSString*) key{
-    [self removeValue:key];
-}
-+(void) removeALL{
-    [self removeAll];
-}
 
 @end

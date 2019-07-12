@@ -130,8 +130,11 @@
 		1554CF361DFCED4C00154ABD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1554CF601DFCEE8300154ABD /* libpyipaa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpyipaa.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1554CF621DFCEE8300154ABD /* pyipaa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pyipaa.h; sourceTree = "<group>"; };
+		15B13E2C22927D0F0063AA74 /* PYInvoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYInvoke.h; path = ../../../PYUtile/PYUtile/Source/Public/Invoke/PYInvoke.h; sourceTree = "<group>"; };
 		15E3EB712159E140005A431F /* PYEventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PYEventManager.h; sourceTree = "<group>"; };
 		15E3EB722159E140005A431F /* PYEventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PYEventManager.m; sourceTree = "<group>"; };
+		15FA8009227EC6C1007C484E /* PYUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYUtile.h; path = ../../../PYUtile/PYUtile/Source/Public/Utile/PYUtile.h; sourceTree = "<group>"; };
+		15FA800A227EC6C2007C484E /* PYUtileMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYUtileMacro.h; path = ../../../PYUtile/PYUtile/Source/Public/Utile/PYUtileMacro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +168,9 @@
 		1502A538223A3C1100F0787A /* PYUtile */ = {
 			isa = PBXGroup;
 			children = (
+				15B13E2C22927D0F0063AA74 /* PYInvoke.h */,
+				15FA8009227EC6C1007C484E /* PYUtile.h */,
+				15FA800A227EC6C2007C484E /* PYUtileMacro.h */,
 				1502A561223A3C6B00F0787A /* UIImage+Expand.h */,
 				1502A560223A3C5600F0787A /* pyutilea.h */,
 				1502A543223A3C4800F0787A /* EXTScope.h */,
