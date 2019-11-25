@@ -12,6 +12,7 @@
 #import "PYTestEntity.h"
 #import "PYEntityManager.h"
 #import "PYEventManager.h"
+#import "PYUtile.h"
 @interface test1:NSObject
 @property (nonatomic) CGRect r;
 @property (nonatomic,strong) NSArray<test1 *> * t;
@@ -28,26 +29,34 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[PYEventManager singleInstance] presisitEvent:@"我的测试" startDate:[NSDate dateWithTimeIntervalSinceNow:60 * 3] endDate:[NSDate dateWithTimeIntervalSinceNow:60 * 4] alarmDate:[NSDate dateWithTimeIntervalSinceNow:60 * 1] completion:^(id data) {
-        
-    }];
-    test1 * t1 = [self createTest];
-    test1 * t2 = [self createTest];
-    NSDictionary * tempd =@{@"t1":t1, @"t2":t2, @"v":@(3)};
-    [PYConfigManager setConfigValue:@[tempd] forKey:@"testd"];
-    id tempd2 = [PYConfigManager configValueForKey:@"testd"];
-    NSArray * a = @[t1, t2];
-    [PYConfigManager setConfigValue:a forKey:@"a"];
-    a = [PYConfigManager configValueForKey:@"a"];
-    [PYConfigManager removeAllConfig];
-    [PYEntityAsist synEntity:@[[PYTestEntity class]] dataBaseName:@"test.db"];
-    PYTestEntity * te = [PYTestEntity new];
-    te.name = @"我的测试";
-    PYEntityManager * em = [PYEntityManager enityWithDataBaseName:@"test.db"];
-    te = [em persist:te];
-    te.name = @"我的修改";
-    te  = [em merge:te];
-    te = [em find:te.keyId entityClass:[PYTestEntity class]];
+    if([PYConfigManager configValueForKey:@"testd"]){
+        threadJoinGlobal(^{
+            sleep(2);
+            threadJoinMain(^{
+                [[[UIAlertView alloc] initWithTitle:@"--" message:@"--" delegate:nil cancelButtonTitle:@"CACENCLE" otherButtonTitles:nil] show];
+            });
+        });
+    }
+//    [[PYEventManager singleInstance] presisitEvent:@"我的测试" startDate:[NSDate dateWithTimeIntervalSinceNow:60 * 3] endDate:[NSDate dateWithTimeIntervalSinceNow:60 * 4] alarmDate:[NSDate dateWithTimeIntervalSinceNow:60 * 1] completion:^(id data) {
+//        
+//    }];
+//    test1 * t1 = [self createTest];
+//    test1 * t2 = [self createTest];
+//    NSDictionary * tempd =@{@"t1":t1, @"t2":t2, @"v":@(3)};
+//    [PYConfigManager setConfigValue:@[tempd] forKey:@"testd"];
+//    id tempd2 = [PYConfigManager configValueForKey:@"testd"];
+//    NSArray * a = @[t1, t2];
+//    [PYConfigManager setConfigValue:a forKey:@"a"];
+//    a = [PYConfigManager configValueForKey:@"a"];
+//    [PYConfigManager removeAllConfig];
+//    [PYEntityAsist synEntity:@[[PYTestEntity class]] dataBaseName:@"test.db"];
+//    PYTestEntity * te = [PYTestEntity new];
+//    te.name = @"我的测试";
+//    PYEntityManager * em = [PYEntityManager enityWithDataBaseName:@"test.db"];
+//    te = [em persist:te];
+//    te.name = @"我的修改";
+//    te  = [em merge:te];
+//    te = [em find:te.keyId entityClass:[PYTestEntity class]];
     return YES;
 }
 -(test1 *) createTest{

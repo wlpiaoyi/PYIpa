@@ -149,10 +149,10 @@
         [columValues addObject:@(entity.keyId)];
         NSString *sql = [PYEntitySql getMergeSql:[entity class] columns:columNames];
         NSInteger result = [super executeUpdate:sql params:columValues];
-        entity.keyId = result;
+        if(result <= 0) return nil;
         return entity;
     }
-    
+
     return nil;
 }
 -(BOOL) remove:(nonnull id<PYEntity>) entity{

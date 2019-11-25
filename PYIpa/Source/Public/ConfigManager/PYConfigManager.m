@@ -66,15 +66,15 @@ const NSString *PY_CONFIGDATA_VALUE = @"PYConfigManger_ValueArg";
     [usrDefaults removeObjectForKey:key];
 }
 +(BOOL) removeAllConfig{
-    NSUserDefaults *usrDefaults=[PYConfigManager classUsrDefaults];
+    NSUserDefaults *usrDefaults =[PYConfigManager classUsrDefaults];
     [usrDefaults removePersistentDomainForName:kAppBundleIdentifier];
-    if(![usrDefaults synchronize]) return NO;
-    NSDictionary *datas = [usrDefaults dictionaryRepresentation];
-    NSArray *keys = [datas allKeys];
-    for (NSString *key in keys) {
-        [usrDefaults removeObjectForKey:key];
-    }
-    return YES;
+    return [usrDefaults synchronize];
+//    NSDictionary *datas = [usrDefaults dictionaryRepresentation];
+//    NSArray *keys = [datas allKeys];
+//    for (NSString *key in keys) {
+//        [usrDefaults removeObjectForKey:key];
+//    }
+//    return YES;
 }
 
 

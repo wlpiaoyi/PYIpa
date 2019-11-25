@@ -220,7 +220,7 @@ const NSString * _Nonnull PYEntityClassIvarSuffixStrong = @"@property (nonatomic
         NSString *name = cache[SqlMangerTypeName];
         for (NSString *colum in notColums) {
             if ([colum isEqual:name]) {
-                [remves addObject:colum];
+                [remves addObject:cache];
                 break;
             }
         }
@@ -239,26 +239,21 @@ const NSString * _Nonnull PYEntityClassIvarSuffixStrong = @"@property (nonatomic
             if(![dataBase open]){
                 printf("open database faild!\n");
             }else{
-                NSMutableString *sqls = [NSMutableString new];
                 Protocol *p = @protocol(PYEntityHookTag);
                 for (Class<PYEntity> clazz in clazzs) {
                     if (class_conformsToProtocol(clazz, p)) {
                         printf("it has inject  in database that name is %s",[NSStringFromClass(clazz) UTF8String]);
                         continue;
                     }
+                    NSMutableString *sqls = [NSMutableString new];
                     class_addProtocol(clazz, p);
                     [sqls appendString: [PYEntitySql getCreateSql:clazz]];
                     [sqls appendString:@"\n"];
-                }
-                if (sqls.length) {
-                    [dataBase executeUpdate:sqls];
-                }
-                
-                sqls = [NSMutableString new];
-                for (Class<PYEntity> clazz in clazzs) {
-                    if (!class_conformsToProtocol(clazz, p)) {
-                        continue;
+                    if (sqls.length) {
+                        [dataBase executeUpdate:sqls];
                     }
+                    
+                    sqls = [NSMutableString new];
                     PYIPAResultSet *result;
                     result = [dataBase executeQuery:[PYEntitySql getTableStrutSql:clazz]];
                     NSMutableArray<NSDictionary*> *struts = [NSMutableArray<NSDictionary*> new];
@@ -267,7 +262,7 @@ const NSString * _Nonnull PYEntityClassIvarSuffixStrong = @"@property (nonatomic
                         [struts addObject:strut];
                     }
                     NSMutableArray *copyCaches =[NSMutableArray arrayWithArray: [PYEntityAsist getEntityReflectCache:clazz]];
-                
+                    
                     for (NSDictionary *strut in struts) {
                         NSString *name = strut[SqlMangerTypeName];
                         for (NSDictionary * cache in copyCaches) {
@@ -282,9 +277,9 @@ const NSString * _Nonnull PYEntityClassIvarSuffixStrong = @"@property (nonatomic
                         [sqls appendString:[PYEntitySql getTableAlertSql:clazz colums:copyCaches]];
                         [sqls appendString:@"\n"];
                     }
-                }
-                if (sqls.length) {
-                    [dataBase executeUpdate:sqls];
+                    if (sqls.length) {
+                        [dataBase executeUpdate:sqls];
+                    }
                 }
                 
                 [dataBase close];

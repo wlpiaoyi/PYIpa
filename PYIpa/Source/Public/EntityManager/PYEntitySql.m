@@ -11,7 +11,7 @@
 #import <objc/runtime.h>
 
 
-const  NSString * _Nonnull  SqlMangerCreateSql = @"CREATE TABLE IF NOT EXISTS \n%@\n(\n\t%@ INTEGER PRIMARY KEY AUTOINCREMENT,\n%@\n)";
+const  NSString * _Nonnull  SqlMangerCreateSql = @"CREATE TABLE IF NOT EXISTS \n%@\n(\n\t%@ INTEGER PRIMARY KEY AUTOINCREMENT,\n%@\n);";
 const  NSString * _Nonnull  SqlMangerAddColumsSql = @"ALTER TABLE %@ ADD COLUMN %@";
 const  NSString * _Nonnull  SqlMangerInsertSql = @"INSERT INTO %@ (\n%@\n) VALUES (%@)";
 const  NSString * _Nonnull  SqlMangerUpdateSql = @"UPDATE %@ SET \n%@\n WHERE %@ = ?";
