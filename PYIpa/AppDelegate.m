@@ -15,6 +15,9 @@
 #import "PYUtile.h"
 @interface test1:NSObject
 @property (nonatomic) CGRect r;
+@property (nonatomic) CLLocationCoordinate2D ld;
+@property (nonatomic) NSInteger i;
+@property (nonatomic, copy) void (^block) (void);
 @property (nonatomic,strong) NSArray<test1 *> * t;
 @property (nonatomic,strong) test1 * property_t;
 @end
@@ -29,6 +32,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    test1 * tt = [self createTest];
+    NSArray<test1 *> * a;// = @[tt];
+//    a.firstObject.block();
+    [PYConfigManager setConfigValue:a forKey:@"ff"];
+    a = [PYConfigManager configValueForKey:@"ff"];
+//    a.firstObject.block();
     if([PYConfigManager configValueForKey:@"testd"]){
         threadJoinGlobal(^{
             sleep(2);
@@ -61,6 +71,9 @@
 }
 -(test1 *) createTest{
     test1 * t = [test1 new];
+    t.i =3;
+    t.ld = CLLocationCoordinate2DMake(20, 20);
+    t.block = ^{NSLog(@"sss");};
     t.r = CGRectMake(2, 2, 2, 2);
     test1 * t2 = [test1 new];
     t.t = @[t2];
