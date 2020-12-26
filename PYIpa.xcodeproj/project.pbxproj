@@ -100,7 +100,6 @@
 		1554CF621DFCEE8300154ABD /* pyipaa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pyipaa.h; sourceTree = "<group>"; };
 		15A91DC8238B9A7C00F5517B /* PYViewAutolayoutCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYViewAutolayoutCenter.h; path = ../../../PYUtile/PYUtile/Source/Public/ViewAutolayout/PYViewAutolayoutCenter.h; sourceTree = "<group>"; };
 		15A91DC9238B9A7C00F5517B /* UIViewController+HookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+HookView.h"; path = "../../../PYUtile/PYUtile/Source/Public/Hook/UIViewController+HookView.h"; sourceTree = "<group>"; };
-		15A91DCA238B9A7C00F5517B /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = metamacros.h; path = ../../../../git/transferpassengerforios/Transfer/Transfer/Lib/PYLib/pyutile/pyutilea/metamacros.h; sourceTree = "<group>"; };
 		15A91DCB238B9A7C00F5517B /* PYXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYXml.h; path = ../../../PYUtile/PYUtile/Source/Public/Xml/PYXml.h; sourceTree = "<group>"; };
 		15A91DCC238B9A7C00F5517B /* PYUtile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYUtile.h; path = ../../../PYUtile/PYUtile/Source/Public/Utile/PYUtile.h; sourceTree = "<group>"; };
 		15A91DCD238B9A7C00F5517B /* UIView+PYExpand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+PYExpand.h"; path = "../../../PYUtile/PYUtile/Source/Public/Expand/UIView+PYExpand.h"; sourceTree = "<group>"; };
@@ -179,7 +178,6 @@
 				15A91E0B238B9B9A00F5517B /* pyutilea.h */,
 				15A91DE5238B9A8000F5517B /* EXTScope.h */,
 				15A91DD3238B9A7D00F5517B /* metamacros.h */,
-				15A91DCA238B9A7C00F5517B /* metamacros.h */,
 				15A91DE2238B9A7F00F5517B /* NSData+PYExpand.h */,
 				15A91DD4238B9A7D00F5517B /* NSDate+PYExpand.h */,
 				15A91DD6238B9A7E00F5517B /* NSDictionary+PYExpand.h */,
@@ -216,7 +214,6 @@
 		1521DC2C226EB2E800CBED0C /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				15B5C9AB2324E54B0073CEBB /* Cookie */,
 				15E3EB702159E10E005A431F /* EventManager */,
 				1554CF161DFCED3000154ABD /* ConfigManager */,
 				1554CF191DFCED3000154ABD /* EntityManager */,
@@ -343,13 +340,6 @@
 				1554CF621DFCEE8300154ABD /* pyipaa.h */,
 			);
 			path = pyipaa;
-			sourceTree = "<group>";
-		};
-		15B5C9AB2324E54B0073CEBB /* Cookie */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cookie;
 			sourceTree = "<group>";
 		};
 		15E3EB702159E10E005A431F /* EventManager */ = {

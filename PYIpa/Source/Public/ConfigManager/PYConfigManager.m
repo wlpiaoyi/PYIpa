@@ -28,11 +28,13 @@ const NSString *PY_CONFIGDATA_VALUE = @"PYConfigManger_ValueArg";
 }
 
 -(void) setValue:(nullable id) value forKey:(nonnull NSString*) key{
-    [usrDefaults setValue:[PYConfigManager parseValueForSet:value] forKey:key];
+    if(value) [usrDefaults setValue:[PYConfigManager parseValueForSet:value] forKey:key];
+    else [self removeValueForKey:key];
 }
 
 -(nullable id) valueForKey:(nonnull NSString*) key{
     id value =  [usrDefaults valueForKey:key];
+    if(!value) return nil;
     return [PYConfigManager parseValueForGet:value];
 }
 
@@ -52,6 +54,9 @@ const NSString *PY_CONFIGDATA_VALUE = @"PYConfigManger_ValueArg";
 }
 
 +(BOOL) setConfigValue:(nullable id) value forKey:(nonnull NSString*) key{
+    if(!value){
+        return [self removeConfigValueForKey:key];
+    }
     NSUserDefaults *usrDefaults = [PYConfigManager classUsrDefaults];
     [usrDefaults setValue:[self parseValueForSet:value] forKey:key];
     return [usrDefaults synchronize];
