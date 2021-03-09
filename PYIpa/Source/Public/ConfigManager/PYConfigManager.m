@@ -55,7 +55,9 @@ const NSString *PY_CONFIGDATA_VALUE = @"PYConfigManger_ValueArg";
 
 +(BOOL) setConfigValue:(nullable id) value forKey:(nonnull NSString*) key{
     if(!value){
-        return [self removeConfigValueForKey:key];
+        NSUserDefaults *usrDefaults=[PYConfigManager classUsrDefaults];
+        [usrDefaults removeObjectForKey:key];
+        return [usrDefaults synchronize];
     }
     NSUserDefaults *usrDefaults = [PYConfigManager classUsrDefaults];
     [usrDefaults setValue:[self parseValueForSet:value] forKey:key];

@@ -13,6 +13,30 @@
 #import "PYEntityManager.h"
 #import "PYEventManager.h"
 #import "PYUtile.h"
+#import "pyutilea.h"
+@interface GFDownloadCacheModel : NSObject
+@property (nonatomic,copy) NSString *name;
+
+@property (nonatomic,assign) NSInteger uuid;
+
+@property (nonatomic,copy) NSString *fileName;
+
+/// 标明是城市类型 还是poi类型
+@property (nonatomic,copy) NSString *type;
+
+@property (nonatomic,assign) long downloadTime;
+
+@property (nonatomic,assign) CLLocationCoordinate2D centerLocation;
+
+@property (nonatomic,assign) CGFloat size;
+
+@end
+
+@implementation GFDownloadCacheModel
+
+
+@end
+
 @interface test1:NSObject
 @property (nonatomic) CGRect r;
 @property (nonatomic) CLLocationCoordinate2D ld;
@@ -39,6 +63,13 @@
     [PYConfigManager setConfigValue:a forKey:@"ff"];
     a = [PYConfigManager configValueForKey:@"ff"];
 //    a.firstObject.block();
+    
+    GFDownloadCacheModel * cacheModel = [GFDownloadCacheModel new];
+    cacheModel.centerLocation = CLLocationCoordinate2DMake(3, 3);
+    NSString * arg = [[((NSDictionary *)[cacheModel objectToDictionary]) toData] toString];
+    
+    [PYConfigManager setConfigValue:@[cacheModel] forKey:@"12312"];
+    id obj = [PYConfigManager configValueForKey:@"12312"];
     if([PYConfigManager configValueForKey:@"testd"]){
         threadJoinGlobal(^{
             sleep(2);
